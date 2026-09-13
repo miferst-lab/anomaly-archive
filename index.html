@@ -6,107 +6,55 @@
 <title>THE ARCHIVE — Global Catalog of Anomalies</title>
 <style>
   :root {
-    --void: #05070a;
-    --panel: #0b1018;
-    --line: #1c2a3a;
-    --amber: #e8b86d;
-    --amber-dim: #8a6a38;
-    --cyan: #6ee7e0;
-    --green: #7dffb3;
-    --red: #ff6b6b;
-    --text: #d7e2ee;
-    --muted: #7d8c9d;
-    --lcars: #c97b3a;
+    --void: #05070a; --panel: #0b1018; --line: #1c2a3a; --amber: #e8b86d;
+    --amber-dim: #8a6a38; --cyan: #6ee7e0; --green: #7dffb3; --red: #ff6b6b;
+    --text: #d7e2ee; --muted: #7d8c9d; --lcars: #c97b3a;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: var(--void); color: var(--text); font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; min-height: 100%; }
-  body::before {
-    content: "";
-    pointer-events: none;
-    position: fixed; inset: 0;
-    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.12) 3px);
-    opacity: .35; z-index: 50;
-  }
-  header {
-    border-bottom: 1px solid var(--line);
-    padding: 18px 28px 14px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 12px;
-    background: linear-gradient(180deg, #101822, #080c12);
-    position: sticky; top: 0; z-index: 40;
-  }
-  .brand { display: flex; align-items: center; gap: 14px; }
-  .sigil {
-    width: 42px; height: 42px; border: 1px solid var(--amber);
-    display: grid; place-items: center; color: var(--amber);
-    font-family: ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: .16em;
-  }
-  .brand h1 { font-size: 15px; letter-spacing: .28em; font-weight: 600; color: var(--amber); }
-  .brand p { font-size: 11px; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; margin-top: 3px; }
-  .meta { text-align: right; font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: var(--cyan); }
-  .meta span { color: var(--muted); }
-  .lcars {
-    height: 8px;
-    background: linear-gradient(90deg, var(--lcars) 0 18%, transparent 18% 20%, #3d6ea8 20% 46%, transparent 46% 48%, var(--green) 48% 62%, transparent 62% 64%, #8b3a3a 64% 100%);
-  }
-  .wrap { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 90px); }
-  aside {
-    border-right: 1px solid var(--line);
-    padding: 18px 16px 40px;
-    background: #080c12;
-  }
-  aside h2 { font-size: 10px; letter-spacing: .2em; color: var(--amber-dim); margin: 16px 0 8px; }
-  .search {
-    width: 100%; background: #0d141d; border: 1px solid var(--line); color: var(--text);
-    padding: 10px 12px; font-size: 13px; outline: none;
-  }
-  .search:focus { border-color: var(--cyan); }
-  .navbtn {
-    display: block; width: 100%; text-align: left; background: transparent; border: 0;
-    color: var(--text); padding: 8px 8px; cursor: pointer; font-size: 13px; border-left: 2px solid transparent;
-  }
-  .navbtn:hover, .navbtn.active { background: #121b26; border-left-color: var(--cyan); color: var(--cyan); }
-  .count { color: var(--muted); font-size: 11px; float: right; }
-  main { padding: 22px 26px 80px; }
-  .intro { max-width: 920px; margin-bottom: 22px; }
-  .intro h2 { font-size: 22px; letter-spacing: .08em; color: var(--amber); font-weight: 500; margin-bottom: 8px; }
-  .intro p { color: var(--muted); line-height: 1.65; font-size: 14px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
-  .card {
-    background: var(--panel); border: 1px solid var(--line); padding: 14px 14px 12px; cursor: pointer;
-    min-height: 168px; display: flex; flex-direction: column; gap: 8px;
-  }
-  .card:hover { border-color: var(--amber-dim); transform: translateY(-1px); }
-  .card .yr { font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: var(--cyan); }
-  .card h3 { font-size: 16px; font-weight: 560; letter-spacing: .02em; }
-  .card .loc { font-size: 12px; color: var(--muted); }
-  .card .sum { font-size: 13px; color: #b7c4d1; line-height: 1.45; flex: 1; }
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tag { font-size: 10px; letter-spacing: .06em; text-transform: uppercase; border: 1px solid var(--line); padding: 2px 6px; color: var(--amber); }
-  .overlay {
-    display: none; position: fixed; inset: 0; background: rgba(0,0,0,.72); z-index: 80; padding: 24px;
-  }
-  .overlay.open { display: grid; place-items: center; }
-  .dossier {
-    width: min(860px, 100%); max-height: 90vh; overflow: auto; background: #0a1018;
-    border: 1px solid var(--amber-dim); padding: 24px 26px 30px;
-  }
-  .dossier h2 { color: var(--amber); font-weight: 500; margin: 6px 0 8px; }
-  .close { float: right; background: none; border: 1px solid var(--line); color: var(--text); padding: 4px 10px; cursor: pointer; }
-  .dossier p { line-height: 1.7; color: #c9d5e0; margin: 10px 0; font-size: 14.5px; }
-  .dossier h3 { margin: 18px 0 8px; font-size: 12px; letter-spacing: .16em; color: var(--cyan); text-transform: uppercase; }
-  .dossier a { color: var(--green); }
-  .sources li { margin: 6px 0; font-size: 13.5px; line-height: 1.5; }
-  .related button { background: #121a24; border: 1px solid var(--line); color: var(--text); padding: 6px 10px; margin: 4px 4px 0 0; cursor: pointer; }
-  footer { border-top: 1px solid var(--line); padding: 16px 28px; font-size: 12px; color: var(--muted); }
-  .note { font-size: 12px; color: var(--amber-dim); margin-top: 10px; }
-  @media (max-width: 880px) {
-    .wrap { grid-template-columns: 1fr; }
-    aside { border-right: 0; border-bottom: 1px solid var(--line); }
-    header { grid-template-columns: 1fr; }
-    .meta { text-align: left; }
-  }
+  body::before { content:""; pointer-events:none; position:fixed; inset:0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.12) 3px); opacity:.35; z-index:50; }
+  header { border-bottom:1px solid var(--line); padding:18px 28px 14px; display:grid; grid-template-columns:1fr auto; gap:12px; background:linear-gradient(180deg,#101822,#080c12); position:sticky; top:0; z-index:40; }
+  .brand { display:flex; align-items:center; gap:14px; }
+  .sigil { width:42px; height:42px; border:1px solid var(--amber); display:grid; place-items:center; color:var(--amber); font-family:ui-monospace,Menlo,monospace; font-size:11px; letter-spacing:.16em; }
+  .brand h1 { font-size:15px; letter-spacing:.28em; font-weight:600; color:var(--amber); }
+  .brand p { font-size:11px; color:var(--muted); letter-spacing:.12em; text-transform:uppercase; margin-top:3px; }
+  .meta { text-align:right; font-family:ui-monospace,Menlo,monospace; font-size:11px; color:var(--cyan); }
+  .meta span { color:var(--muted); }
+  .lcars { height:8px; background:linear-gradient(90deg, var(--lcars) 0 18%, transparent 18% 20%, #3d6ea8 20% 46%, transparent 46% 48%, var(--green) 48% 62%, transparent 62% 64%, #8b3a3a 64% 100%); }
+  .wrap { display:grid; grid-template-columns:280px 1fr; min-height:calc(100vh - 90px); }
+  aside { border-right:1px solid var(--line); padding:18px 16px 40px; background:#080c12; }
+  aside h2 { font-size:10px; letter-spacing:.2em; color:var(--amber-dim); margin:16px 0 8px; }
+  .search { width:100%; background:#0d141d; border:1px solid var(--line); color:var(--text); padding:10px 12px; font-size:13px; outline:none; }
+  .search:focus { border-color:var(--cyan); }
+  .navbtn { display:block; width:100%; text-align:left; background:transparent; border:0; color:var(--text); padding:8px 8px; cursor:pointer; font-size:13px; border-left:2px solid transparent; }
+  .navbtn:hover, .navbtn.active { background:#121b26; border-left-color:var(--cyan); color:var(--cyan); }
+  .count { color:var(--muted); font-size:11px; float:right; }
+  main { padding:22px 26px 80px; }
+  .intro { max-width:920px; margin-bottom:22px; }
+  .intro h2 { font-size:22px; letter-spacing:.08em; color:var(--amber); font-weight:500; margin-bottom:8px; }
+  .intro p { color:var(--muted); line-height:1.65; font-size:14px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:14px; }
+  .card { background:var(--panel); border:1px solid var(--line); padding:14px 14px 12px; cursor:pointer; min-height:168px; display:flex; flex-direction:column; gap:8px; }
+  .card:hover { border-color:var(--amber-dim); }
+  .card .yr { font-family:ui-monospace,Menlo,monospace; font-size:11px; color:var(--cyan); }
+  .card h3 { font-size:16px; font-weight:560; }
+  .card .loc { font-size:12px; color:var(--muted); }
+  .card .sum { font-size:13px; color:#b7c4d1; line-height:1.45; flex:1; }
+  .tags { display:flex; flex-wrap:wrap; gap:6px; }
+  .tag { font-size:10px; letter-spacing:.06em; text-transform:uppercase; border:1px solid var(--line); padding:2px 6px; color:var(--amber); }
+  .overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.72); z-index:80; padding:24px; }
+  .overlay.open { display:grid; place-items:center; }
+  .dossier { width:min(860px,100%); max-height:90vh; overflow:auto; background:#0a1018; border:1px solid var(--amber-dim); padding:24px 26px 30px; }
+  .dossier h2 { color:var(--amber); font-weight:500; margin:6px 0 8px; }
+  .close { float:right; background:none; border:1px solid var(--line); color:var(--text); padding:4px 10px; cursor:pointer; }
+  .dossier p { line-height:1.7; color:#c9d5e0; margin:10px 0; font-size:14.5px; }
+  .dossier h3 { margin:18px 0 8px; font-size:12px; letter-spacing:.16em; color:var(--cyan); text-transform:uppercase; }
+  .dossier a { color:var(--green); }
+  .sources li { margin:6px 0; font-size:13.5px; line-height:1.5; }
+  .related button { background:#121a24; border:1px solid var(--line); color:var(--text); padding:6px 10px; margin:4px 4px 0 0; cursor:pointer; }
+  footer { border-top:1px solid var(--line); padding:16px 28px; font-size:12px; color:var(--muted); }
+  .note { font-size:12px; color:var(--amber-dim); margin-top:10px; }
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} aside{border-right:0;border-bottom:1px solid var(--line);} header{grid-template-columns:1fr;} .meta{text-align:left;} }
 </style>
 </head>
 <body>
@@ -118,10 +66,7 @@
       <p>Aerospace · Anomalous · Unresolved · Catalog</p>
     </div>
   </div>
-  <div class="meta">
-    LANG <span>EN</span> · STATUS <span>SEED CORPUS</span><br>
-    CLEARANCE <span>PUBLIC</span> · FILES <span id="filecount">—</span>
-  </div>
+  <div class="meta">LANG <span>EN</span> · STATUS <span>SEED CORPUS</span><br>CLEARANCE <span>PUBLIC</span> · FILES <span id="filecount">—</span></div>
 </header>
 <div class="lcars"></div>
 <div class="wrap">
@@ -131,45 +76,25 @@
     <div id="domains"></div>
     <h2>Protocols</h2>
     <button class="navbtn" data-filter="all">All files</button>
-    <p class="note">This is a seed catalog of landmark files, not a claim that every report is true. Each dossier separates the report from official and alternative readings.</p>
+    <p class="note">This is a seed catalog of landmark files, not a claim that every report is true.</p>
   </aside>
   <main>
     <div class="intro">
       <h2 id="viewtitle">All files</h2>
-      <p>A navigable catalog of reported UFO/UAP/USO events, cryptids, high-strangeness clusters, disappearances, and cover-up narratives. Open a file for sources. Related files let you drop one level deeper. Language packs are reserved for a later build.</p>
+      <p>Open a file for sources. Related files let you drop one level deeper.</p>
     </div>
     <div class="grid" id="grid"></div>
   </main>
 </div>
-<footer>
-  Seed archive · English primary · Aesthetic brief: X-Files briefing room / Matrix terminal / Starfleet LCARS. Not an encyclopedia of every internet rumor. Harmful denialist and racist conspiracy canons are excluded on purpose.
-</footer>
-<div class="overlay" id="overlay">
-  <article class="dossier" id="dossier"></article>
-</div>
-<script src="data-0.js"></script>
-<script src="data-1.js"></script>
-<script src="data-2.js"></script>
-<script src="data-3.js"></script>
+<footer>Seed archive · English primary · X-Files / Matrix / LCARS.</footer>
+<div class="overlay" id="overlay"><article class="dossier" id="dossier"></article></div>
+<script src="https://cdn.jsdelivr.net/gh/miferst-lab/anomaly-archive@main/data-0.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/miferst-lab/anomaly-archive@main/data-1.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/miferst-lab/anomaly-archive@main/data-2.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/miferst-lab/anomaly-archive@main/data-3.js"></script>
 <script>
 const CASES = window.CASES || [];
-const DOMAINS = [
-  ["all","All files"],
-  ["uap","UAP / aerial"],
-  ["uso","USO / transmedium"],
-  ["encounters","Close encounters"],
-  ["crash-retrieval","Crash & retrieval"],
-  ["nuclear","Nuclear & strategic"],
-  ["cover-up","Programs & cover narratives"],
-  ["cryptid","Cryptids"],
-  ["high-strangeness","High strangeness"],
-  ["haunt","Hauntings"],
-  ["disappearance","Disappearances"],
-  ["fortean","Fortean & sky/space"],
-  ["artifact","Anomalous artifacts"],
-  ["historical-sky","Pre-modern skies"],
-  ["religious-anomaly","Religious anomalies"]
-];
+const DOMAINS = [["all","All files"],["uap","UAP / aerial"],["uso","USO / transmedium"],["encounters","Close encounters"],["crash-retrieval","Crash & retrieval"],["nuclear","Nuclear & strategic"],["cover-up","Programs & cover narratives"],["cryptid","Cryptids"],["high-strangeness","High strangeness"],["haunt","Hauntings"],["disappearance","Disappearances"],["fortean","Fortean & sky/space"],["artifact","Anomalous artifacts"],["historical-sky","Pre-modern skies"],["religious-anomaly","Religious anomalies"]];
 const grid = document.getElementById("grid");
 const domainsEl = document.getElementById("domains");
 const overlay = document.getElementById("overlay");
@@ -190,8 +115,7 @@ DOMAINS.forEach(([id,label]) => {
 });
 function matches(c, term){
   if(!term) return true;
-  const blob = (c.title+" "+c.loc+" "+c.year+" "+c.summary+" "+c.tags.join(" ")).toLowerCase();
-  return blob.includes(term);
+  return (c.title+" "+c.loc+" "+c.year+" "+c.summary+" "+c.tags.join(" ")).toLowerCase().includes(term);
 }
 function render(){
   const term = q.value.trim().toLowerCase();
@@ -208,16 +132,7 @@ function openCase(id){
   const c = clean.find(x => x.id===id);
   if(!c) return;
   const rel = (c.related||[]).map(rid => clean.find(x=>x.id===rid)).filter(Boolean);
-  dossier.innerHTML = `
-    <button class="close" id="x">CLOSE</button>
-    <div class="yr">${c.year} · FILE ${c.id}</div>
-    <h2>${c.title}</h2>
-    <div class="loc">${c.loc}</div>
-    <p>${c.text}</p>
-    <h3>Sources</h3>
-    <ul class="sources">${c.sources.map(s=>`<li><a href="${s.u}" target="_blank" rel="noopener">${s.n}</a></li>`).join("")}</ul>
-    ${rel.length?`<h3>Related files</h3><div class="related">${rel.map(r=>`<button data-go="${r.id}">${r.title}</button>`).join("")}</div>`:""}
-  `;
+  dossier.innerHTML = `<button class="close" id="x">CLOSE</button><div class="yr">${c.year} · FILE ${c.id}</div><h2>${c.title}</h2><div class="loc">${c.loc}</div><p>${c.text}</p><h3>Sources</h3><ul class="sources">${c.sources.map(s=>`<li><a href="${s.u}" target="_blank" rel="noopener">${s.n}</a></li>`).join("")}</ul>${rel.length?`<h3>Related files</h3><div class="related">${rel.map(r=>`<button data-go="${r.id}">${r.title}</button>`).join("")}</div>`:""}`;
   overlay.classList.add("open");
   dossier.querySelector("#x").onclick = () => overlay.classList.remove("open");
   dossier.querySelectorAll("[data-go]").forEach(b => b.onclick = () => openCase(b.dataset.go));
