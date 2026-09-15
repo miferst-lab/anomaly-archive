@@ -76,7 +76,7 @@
     <div id="domains"></div>
     <h2>Protocols</h2>
     <button class="navbtn" data-filter="all">All files</button>
-    <p class="note">This is a seed catalog of landmark files, not a claim that every report is true.</p>
+    <p class="note">This is a seed catalog of landmark files, not a claim that every report is true. Each dossier lists sources.</p>
   </aside>
   <main>
     <div class="intro">
@@ -92,6 +92,7 @@
 <script src="https://cdn.jsdelivr.net/gh/miferst-lab/anomaly-archive@main/data-1.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/miferst-lab/anomaly-archive@main/data-2.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/miferst-lab/anomaly-archive@main/data-3.js"></script>
+<script src="https://raw.githubusercontent.com/miferst-lab/anomaly-archive/main/data-4.js"></script>
 <script>
 const CASES = window.CASES || [];
 const DOMAINS = [["all","All files"],["uap","UAP / aerial"],["uso","USO / transmedium"],["encounters","Close encounters"],["crash-retrieval","Crash & retrieval"],["nuclear","Nuclear & strategic"],["cover-up","Programs & cover narratives"],["cryptid","Cryptids"],["high-strangeness","High strangeness"],["haunt","Hauntings"],["disappearance","Disappearances"],["fortean","Fortean & sky/space"],["artifact","Anomalous artifacts"],["historical-sky","Pre-modern skies"],["religious-anomaly","Religious anomalies"]];
@@ -132,7 +133,7 @@ function openCase(id){
   const c = clean.find(x => x.id===id);
   if(!c) return;
   const rel = (c.related||[]).map(rid => clean.find(x=>x.id===rid)).filter(Boolean);
-  dossier.innerHTML = `<button class="close" id="x">CLOSE</button><div class="yr">${c.year} · FILE ${c.id}</div><h2>${c.title}</h2><div class="loc">${c.loc}</div><p>${c.text}</p><h3>Sources</h3><ul class="sources">${c.sources.map(s=>`<li><a href="${s.u}" target="_blank" rel="noopener">${s.n}</a></li>`).join("")}</ul>${rel.length?`<h3>Related files</h3><div class="related">${rel.map(r=>`<button data-go="${r.id}">${r.title}</button>`).join("")}</div>`:""}`;
+  dossier.innerHTML = `<button class="close" id="x">CLOSE</button><div class="yr">${c.year} · FILE ${c.id}</div><h2>${c.title}</h2><div class="loc">${c.loc}</div><p>${c.text}</p><h3>Sources</h3><ul class="sources">${(c.sources||[]).map(s=>`<li><a href="${s.u}" target="_blank" rel="noopener">${s.n}</a></li>`).join("")}</ul>${rel.length?`<h3>Related files</h3><div class="related">${rel.map(r=>`<button data-go="${r.id}">${r.title}</button>`).join("")}</div>`:""}`;
   overlay.classList.add("open");
   dossier.querySelector("#x").onclick = () => overlay.classList.remove("open");
   dossier.querySelectorAll("[data-go]").forEach(b => b.onclick = () => openCase(b.dataset.go));
