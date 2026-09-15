@@ -8,7 +8,6 @@
 :root{--void:#05070a;--panel:#0b1018;--line:#1c2a3a;--amber:#e8b86d;--amber-dim:#8a6a38;--cyan:#6ee7e0;--green:#7dffb3;--text:#d7e2ee;--muted:#7d8c9d;--lcars:#c97b3a}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--void);color:var(--text);font-family:Segoe UI,Helvetica Neue,Arial,sans-serif;min-height:100%}
-body::before{content:"";pointer-events:none;position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.12) 3px);opacity:.3;z-index:50}
 header{border-bottom:1px solid var(--line);padding:16px 22px 12px;display:flex;justify-content:space-between;gap:12px;align-items:center;background:#101822;position:sticky;top:0;z-index:40}
 .brand{display:flex;align-items:center;gap:12px;cursor:pointer}
 .sigil{width:40px;height:40px;border:1px solid var(--amber);display:grid;place-items:center;color:var(--amber);font-size:11px;letter-spacing:.16em}
@@ -24,7 +23,7 @@ h2.sec{font-size:11px;letter-spacing:.2em;color:var(--amber-dim);margin:8px 0 12
 .cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
 .cat{background:var(--panel);border:1px solid var(--line);padding:14px;cursor:pointer;text-align:left;color:var(--text)}
 .cat.active,.cat:hover{border-color:var(--cyan);color:var(--cyan)}
-.cat b{display:block;font-size:14px;font-weight:560}
+.cat b{display:block;font-size:14px}
 .cat span{font-size:11px;color:var(--muted)}
 .rail-wrap{margin-top:18px;display:none}
 .rail-wrap.open{display:block}
@@ -35,7 +34,7 @@ h2.sec{font-size:11px;letter-spacing:.2em;color:var(--amber-dim);margin:8px 0 12
 .chip .yr{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--cyan)}
 .chip h3{font-size:15px;margin:6px 0 4px}
 .chip p{font-size:12px;color:#b7c4d1;line-height:1.4}
-.hero{width:100%;max-height:380px;object-fit:cover;border:1px solid var(--line);margin:12px 0 6px;background:#070b10}
+.hero{width:100%;max-height:380px;object-fit:cover;border:1px solid var(--line);margin:12px 0 6px}
 .cap{font-size:11px;color:var(--muted);margin-bottom:14px}
 .back{background:none;border:1px solid var(--line);color:var(--text);padding:6px 10px;cursor:pointer;margin-bottom:14px}
 .page-k{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--cyan)}
@@ -47,7 +46,6 @@ h2.sec{font-size:11px;letter-spacing:.2em;color:var(--amber-dim);margin:8px 0 12
 .src{border:1px solid var(--line);padding:10px 12px;margin:8px 0;background:#0a1119}
 .src a{color:var(--green);text-decoration:none}
 .src small{display:block;color:var(--muted);margin-top:4px}
-.rel button{background:#121a24;border:1px solid var(--line);color:var(--text);padding:7px 10px;margin:4px 4px 0 0;cursor:pointer}
 .stars button{background:none;border:0;font-size:22px;cursor:pointer;color:#3d4a58}
 .stars button.on{color:var(--amber)}
 .avg{color:var(--muted);font-size:13px;margin-left:8px}
@@ -78,7 +76,7 @@ footer{border-top:1px solid var(--line);padding:14px 22px;font-size:12px;color:v
   </div>
 </section>
 <section id="page"></section>
-<footer>Images from Wikimedia Commons are illustrative. Ratings stay on this device.</footer>
+<footer>Illustrative images. Ratings stay on this device.</footer>
 <script src="data-0.js"></script>
 <script src="data-1.js"></script>
 <script src="data-2.js"></script>
@@ -86,6 +84,6 @@ footer{border-top:1px solid var(--line);padding:14px 22px;font-size:12px;color:v
 <script src="data-4.js"></script>
 <script src="data-5.js"></script>
 <script src="data-6.js"></script>
-<script src="app.js"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>
