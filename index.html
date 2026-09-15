@@ -48,7 +48,7 @@ h2.sec{font-size:11px;letter-spacing:.2em;color:var(--amber-dim);margin:8px 0 12
 .rel button{background:#121a24;border:1px solid var(--line);color:var(--text);padding:7px 10px;cursor:pointer}
 .stars button{background:none;border:0;font-size:22px;cursor:pointer;color:#3d4a58}
 .stars button.on{color:var(--amber)}
-avg{color:var(--muted);font-size:13px;margin-left:8px}
+.avg{color:var(--muted);font-size:13px;margin-left:8px}
 .notes textarea,.notes input{width:100%;background:#0d141d;border:1px solid var(--line);color:var(--text);padding:10px;margin:6px 0}
 .notes button{background:#15202c;border:1px solid var(--cyan);color:var(--cyan);padding:8px 12px;cursor:pointer}
 .comment{border-top:1px solid var(--line);padding:10px 0;font-size:14px}
@@ -66,7 +66,6 @@ footer{border-top:1px solid var(--line);padding:14px 22px;font-size:12px;color:v
   <div class="meta">EN · FILES <span id="filecount">—</span></div>
 </header>
 <div class="lcars"></div>
-
 <section id="home">
   <input class="search" id="q" placeholder="Search designation, place, year…" />
   <h2 class="sec">Categories</h2>
@@ -76,10 +75,8 @@ footer{border-top:1px solid var(--line);padding:14px 22px;font-size:12px;color:v
     <div class="rail" id="rail"></div>
   </div>
 </section>
-
 <section id="page"></section>
 <footer>Seed archive. Ratings and comments stay on this device until a server is added. Sources exclude Wikipedia.</footer>
-
 <script src="data-0.js"></script>
 <script src="data-1.js"></script>
 <script src="data-2.js"></script>
@@ -103,47 +100,34 @@ const DOMAINS = [
   ["religious-anomaly","Religious anomalies","Apparitions and crowd events"]
 ];
 const EXTRA = {
-  "nimitz-2004":[["AARO historical record","https://www.aaro.mil/"],["Navy / UAP reporting path","https://www.navy.mil/Press-Office/"],["The Debrief Nimitz reporting","https://thedebrief.org/"]],
-  "roswell-1947":[["USAF Roswell Report 1994/97","https://www.af.mil/"],["FBI Vault UFO files","https://vault.fbi.gov/UFO"],["National Archives UFO records","https://www.archives.gov/research/military/air-force/ufos"]],
-  "rendlesham-1980":[["UK National Archives UFO files","https://www.nationalarchives.gov.uk/ufos/"],["Halt memorandum discussion","https://overclassified.org/photos/"]],
-  "malmstrom-1967":[["FOIA missile-incident collections","https://www.archives.gov/"],["Robert Hastings nuclear-UFO archive notes","https://www.ufohastings.com/"]],
+  "nimitz-2004":[["AARO","https://www.aaro.mil/"],["The Debrief","https://thedebrief.org/"]],
+  "roswell-1947":[["FBI Vault UFO files","https://vault.fbi.gov/UFO"],["National Archives UFO records","https://www.archives.gov/research/military/air-force/ufos"]],
+  "rendlesham-1980":[["UK National Archives UFO files","https://www.nationalarchives.gov.uk/ufos/"]],
+  "malmstrom-1967":[["Robert Hastings archive","https://www.ufohastings.com/"]],
   "minot-1968":[["Minot B-52 documentation project","https://minotb52ufo.com/"]],
-  "shag-harbor":[["Library and Archives Canada search path","https://library-archives.canada.ca/"],["Canadian Coast Guard / RCMP period reporting","https://www.rcmp-grc.gc.ca/"]],
   "cash-landrum-1980":[["UAPRAD case note","https://uaprad.org/research"]],
-  "hessdalen":[["Project Hessdalen station","https://www.hessdalen.org/"]],
-  "calvine-1990":[["David Clarke / Sheffield Hallam MoD research","https://drdavidclarke.co.uk/"]],
-  "phoenix-lights":[["City of Phoenix / AZ National Guard period briefings","https://az.ng.mil/"]],
-  "belgian-wave":[["Belgian Defence historical SOBEPS liaison files","https://www.mil.be/"]],
-  "socorro-1964":[["Project Blue Book case card (Fold3 / NARA)","https://www.fold3.com/"]],
-  "ariel-1994":[["Harvard interview project context (Mack papers)","https://www.harvard.edu/"]],
-  "varginha-1996":[["Brazilian Army public statement trail","https://www.eb.mil.br/"]],
-  "skinwalker-1996":[["AAWSAP / DIA program reporting (Senate record)","https://www.intelligence.senate.gov/"]],
-  "robertson-panel":[["CIA CREST Robertson Panel","https://www.cia.gov/readingroom/"]],
+  "hessdalen":[["Project Hessdalen","https://www.hessdalen.org/"]],
+  "calvine-1990":[["David Clarke research","https://drdavidclarke.co.uk/"]],
+  "robertson-panel":[["CIA Reading Room","https://www.cia.gov/readingroom/"]],
   "majestic-12":[["FBI Vault MJ-12","https://vault.fbi.gov/Majestic%2012"]],
   "blue-book":[["NARA Project Blue Book","https://www.archives.gov/research/military/air-force/ufos"]],
   "db-cooper":[["FBI Vault NORJAK","https://vault.fbi.gov/D.B.%20Cooper%20"]],
-  "mh370":[["ATSAN / Malaysian official safety record","https://www.mot.gov.my/"]],
-  "tunguska":[["Smithsonian / RAS expedition literature","https://www.si.edu/"]],
   "antikythera":[["Antikythera Mechanism Research Project","https://www.antikythera-mechanism.gr/"]],
-  "voynich":[["Beinecke Rare Book Library MS 408","https://beinecke.library.yale.edu/"]],
-  "fatima-1917":[["Santuário de Fátima historical office","https://www.fatima.pt/en"]],
+  "voynich":[["Beinecke Library MS 408","https://beinecke.library.yale.edu/"]],
+  "fatima-1917":[["Sanctuary of Fatima","https://www.fatima.pt/en"]],
   "knock-1879":[["Knock Shrine history","https://www.knockshrine.ie/history/"]],
-  "zeitoun-1968":[["Coptic Patriarchate period statements","https://copticorthodox.church/"]],
-  "enfield":[["SPR Enfield notes","https://www.spr.ac.uk/"]],
-  "borley":[["SPR / Harry Price collections","https://www.spr.ac.uk/"]],
-  "nessie":[["Official Loch Ness Centre research notes","https://www.lochness.co.uk/"]],
-  "bigfoot":[["BFRO report database","https://www.bfro.net/"]],
-  "mothman":[["John Keel source literature via publisher records","https://www.tor.com/"]]
+  "enfield":[["Society for Psychical Research","https://www.spr.ac.uk/"]],
+  "borley":[["SPR collections","https://www.spr.ac.uk/"]],
+  "bigfoot":[["BFRO report database","https://www.bfro.net/"]]
 };
 const PORTALS = [
-  ["NICAP scanned case files","https://www.nicap.org/"],
-  ["NARA UFO / aerial phenomena","https://www.archives.gov/research/military/air-force/ufos"],
+  ["NICAP scanned files","https://www.nicap.org/"],
+  ["NARA aerial phenomena","https://www.archives.gov/research/military/air-force/ufos"],
   ["FBI Vault UFO collection","https://vault.fbi.gov/UFO"],
   ["AARO","https://www.aaro.mil/"],
-  ["UAPRAD case notes","https://uaprad.org/research"],
-  ["Famous incident index","https://nloresource.com/incidents"]
+  ["UAPRAD","https://uaprad.org/research"],
+  ["Incident index","https://nloresource.com/incidents"]
 ];
-
 const clean = (window.CASES||[]).filter(c=>c.id&&c.title);
 document.getElementById("filecount").textContent=String(clean.length).padStart(3,"0");
 const catsEl=document.getElementById("cats");
@@ -153,40 +137,39 @@ const railtitle=document.getElementById("railtitle");
 const home=document.getElementById("home");
 const page=document.getElementById("page");
 let openDomain=null;
-
 function wiki(u){return /wikipedia\.org/i.test(u||"")}
 function sourcesFor(c){
   const out=[];
-  (c.sources||[]).forEach(s=>{if(s&&s.u&&!wiki(s.u))out.push([s.n,s.u,"case file"]})});
-  (EXTRA[c.id]||[]).forEach(s=>out.push([s[0],s[1],"specialist"]));
-  if(out.length<3)PORTALS.slice(0,3).forEach(s=>out.push([s[0],s[1],"portal"]));
-  const seen=new Set();
-  return out.filter(([n,u])=>{if(seen.has(u))return false;seen.add(u);return true}).slice(0,6);
+  (c.sources||[]).forEach(function(s){ if(s&&s.u&&!wiki(s.u)) out.push([s.n,s.u,"case file"]); });
+  (EXTRA[c.id]||[]).forEach(function(s){ out.push([s[0],s[1],"specialist"]); });
+  if(out.length<3) PORTALS.slice(0,4).forEach(function(s){ out.push([s[0],s[1],"portal"]); });
+  const seen={};
+  return out.filter(function(x){ if(seen[x[1]]) return false; seen[x[1]]=1; return true; }).slice(0,6);
 }
 function storeKey(id){return "aa-"+id}
 function loadFB(id){
-  try{return JSON.parse(localStorage.getItem(storeKey(id))||"{\"r\":0,\"c\":[]}")}catch(e){return {r:0,c:[]}}
+  try{return JSON.parse(localStorage.getItem(storeKey(id))||'{"r":0,"c":[]}');}catch(e){return {r:0,c:[]};}
 }
-function saveFB(id,data){localStorage.setItem(storeKey(id),JSON.stringify(data))}
-
+function saveFB(id,data){localStorage.setItem(storeKey(id),JSON.stringify(data));}
+function match(c,term){
+  if(!term) return true;
+  return (c.title+" "+c.loc+" "+c.year+" "+c.summary+" "+(c.tags||[]).join(" ")).toLowerCase().includes(term);
+}
 function renderCats(term){
   catsEl.innerHTML="";
-  DOMAINS.forEach(([id,label,blurb])=>{
-    const n=clean.filter(c=>c.domain===id && match(c,term)).length;
-    if(term&&!n)return;
-    const b=document.createElement("button");
+  DOMAINS.forEach(function(d){
+    var id=d[0],label=d[1],blurb=d[2];
+    var n=clean.filter(function(c){return c.domain===id && match(c,term);}).length;
+    if(term&&!n) return;
+    var b=document.createElement("button");
     b.className="cat"+(openDomain===id?" active":"");
-    b.innerHTML=`<b>${label}</b><span>${n} files · ${blurb}</span>`;
-    b.onclick=()=>toggleDomain(id,label);
+    b.innerHTML="<b>"+label+"</b><span>"+n+" files · "+blurb+"</span>";
+    b.onclick=function(){toggleDomain(id,label);};
     catsEl.appendChild(b);
   });
 }
-function match(c,term){
-  if(!term)return true;
-  return (c.title+" "+c.loc+" "+c.year+" "+c.summary+" "+(c.tags||[]).join(" ")).toLowerCase().includes(term);
-}
 function toggleDomain(id,label){
-  if(openDomain===id){openDomain=null;railwrap.classList.remove("open");renderCats(document.getElementById("q").value.trim().toLowerCase());return;}
+  if(openDomain===id){ openDomain=null; railwrap.classList.remove("open"); renderCats(document.getElementById("q").value.trim().toLowerCase()); return; }
   openDomain=id;
   railtitle.textContent=label+" — cases";
   fillRail(id);
@@ -195,76 +178,55 @@ function toggleDomain(id,label){
   railwrap.scrollIntoView({behavior:"smooth",block:"nearest"});
 }
 function fillRail(id){
-  const term=document.getElementById("q").value.trim().toLowerCase();
+  var term=document.getElementById("q").value.trim().toLowerCase();
   rail.innerHTML="";
-  clean.filter(c=>c.domain===id&&match(c,term)).forEach(c=>{
-    const el=document.createElement("article");
+  clean.filter(function(c){return c.domain===id&&match(c,term);}).forEach(function(c){
+    var el=document.createElement("article");
     el.className="chip";
-    el.innerHTML=`<div class="yr">${c.year}</div><h3>${c.title}</h3><p>${c.summary}</p>`;
-    el.onclick=()=>openCase(c.id);
+    el.innerHTML="<div class=yr>"+c.year+"</div><h3>"+c.title+"</h3><p>"+c.summary+"</p>";
+    el.onclick=function(){openCase(c.id);};
     rail.appendChild(el);
   });
 }
+function esc(s){return String(s).replace(/[&<>"']/g,function(m){return ({'&':'&','<':'<','>':'>','"':'"',"'":'&#39;'})[m];});}
 function openCase(id){
-  const c=clean.find(x=>x.id===id);if(!c)return;
+  var c=clean.find(function(x){return x.id===id;}); if(!c) return;
   location.hash="file/"+id;
   home.style.display="none";
   page.style.display="block";
-  const fb=loadFB(id);
-  const src=sourcesFor(c);
-  const rel=(c.related||[]).map(rid=>clean.find(x=>x.id===rid)).filter(Boolean);
-  page.innerHTML=`<button class="back" id="back">← Categories</button>
-    <div class="page-k">FILE ${c.id} · ${c.year} · ${c.domain}</div>
-    <h2>${c.title}</h2><div class="loc">${c.loc}</div>
-    <p class="body">${c.text||c.summary}</p>
-    <div class="block"><h3>Sources</h3>
-      ${src.map(([n,u,k])=>`<div class="src"><a href="${u}" target="_blank" rel="noopener">${n}</a><small>${k} · ${u.replace(/^https?:\/\//,"")}</small></div>`).join("")}
-      <p class="note">Wikipedia omitted on purpose. Portals are starting points, not proof.</p>
-    </div>
-    ${rel.length?`<div class="block"><h3>Related files</h3><div class="rel">${rel.map(r=>`<button data-go="${r.id}">${r.title}</button>`).join("")}</div></div>`:""}
-    <div class="block"><h3>Rating</h3>
-      <div class="stars" id="stars">${[1,2,3,4,5].map(i=>`<button data-r="${i}" class="${fb.r>=i?"on":""}">★</button>`).join("")}<span class="avg">${fb.r?fb.r+" / 5 on this device":"no rating yet"}</span></div>
-    </div>
-    <div class="block notes"><h3>Comments</h3>
-      <input id="who" placeholder="Name or handle" />
-      <textarea id="txt" rows="4" placeholder="Field note, source tip, disagreement…"></textarea>
-      <button id="post">File comment</button>
-      <p class="note">Stored in this browser only. Not a public forum yet.</p>
-      <div id="clist">${(fb.c||[]).map(x=>`<div class="comment"><div class="who">${esc(x.w)} · ${x.t}</div>${esc(x.b)}</div>`).join("")||"<p class=note>No comments on this device.</p>"}</div>
-    </div>`;
+  var fb=loadFB(id);
+  var src=sourcesFor(c);
+  var rel=(c.related||[]).map(function(rid){return clean.find(function(x){return x.id===rid;});}).filter(Boolean);
+  var stars="";
+  for(var i=1;i<=5;i++) stars+="<button data-r='"+i+"' class='"+(fb.r>=i?"on":"")+"'>★</button>";
+  var comments=(fb.c||[]).map(function(x){return "<div class=comment><div class=who>"+esc(x.w)+" · "+x.t+"</div>"+esc(x.b)+"</div>";}).join("") || "<p class=note>No comments on this device.</p>";
+  var srcHtml=src.map(function(s){return "<div class=src><a href='"+s[1]+"' target=_blank rel=noopener>"+s[0]+"</a><small>"+s[2]+" · "+s[1].replace(/^https?:\/\//,"")+"</small></div>";}).join("");
+  var relHtml=rel.length?"<div class=block><h3>Related files</h3><div class=rel>"+rel.map(function(r){return "<button data-go='"+r.id+"'>"+r.title+"</button>";}).join("")+"</div></div>":"";
+  page.innerHTML="<button class=back id=back>← Categories</button><div class=page-k>FILE "+c.id+" · "+c.year+" · "+c.domain+"</div><h2>"+c.title+"</h2><div class=loc>"+c.loc+"</div><p class=body>"+(c.text||c.summary)+"</p><div class=block><h3>Sources</h3>"+srcHtml+"<p class=note>Wikipedia omitted. Portals are starting points, not proof.</p></div>"+relHtml+"<div class=block><h3>Rating</h3><div class=stars id=stars>"+stars+"<span class=avg>"+(fb.r?fb.r+" / 5 on this device":"no rating yet")+"</span></div></div><div class='block notes'><h3>Comments</h3><input id=who placeholder='Name or handle' /><textarea id=txt rows=4 placeholder='Field note, source tip, disagreement…'></textarea><button id=post>File comment</button><p class=note>Stored in this browser only.</p><div id=clist>"+comments+"</div></div>";
   document.getElementById("back").onclick=goHome;
-  page.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>openCase(b.dataset.go));
-  page.querySelectorAll("#stars button").forEach(b=>b.onclick=()=>{
-    const d=loadFB(id);d.r=+b.dataset.r;saveFB(id,d);openCase(id);
-  });
-  document.getElementById("post").onclick=()=>{
-    const w=document.getElementById("who").value.trim()||"anonymous";
-    const b=document.getElementById("txt").value.trim();
-    if(!b)return;
-    const d=loadFB(id);d.c=d.c||[];d.c.unshift({w,b,t:new Date().toISOString().slice(0,16).replace("T"," ")});saveFB(id,d);openCase(id);
+  page.querySelectorAll("[data-go]").forEach(function(b){ b.onclick=function(){openCase(b.getAttribute("data-go"));}; });
+  page.querySelectorAll("#stars button").forEach(function(b){ b.onclick=function(){ var d=loadFB(id); d.r=+b.getAttribute("data-r"); saveFB(id,d); openCase(id); }; });
+  document.getElementById("post").onclick=function(){
+    var w=document.getElementById("who").value.trim()||"anonymous";
+    var b=document.getElementById("txt").value.trim();
+    if(!b) return;
+    var d=loadFB(id); d.c=d.c||[]; d.c.unshift({w:w,b:b,t:new Date().toISOString().slice(0,16).replace("T"," ")}); saveFB(id,d); openCase(id);
   };
   window.scrollTo(0,0);
 }
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&","<":"<",">":">","\"":""","'":"&#39;"}[m]))}
-function goHome(){
-  location.hash="";
-  page.style.display="none";home.style.display="block";
-}
+function goHome(){ location.hash=""; page.style.display="none"; home.style.display="block"; }
 document.getElementById("goHome").onclick=goHome;
-document.getElementById("q").addEventListener("input",()=>{
-  const t=document.getElementById("q").value.trim().toLowerCase();
+document.getElementById("q").addEventListener("input",function(){
+  var t=document.getElementById("q").value.trim().toLowerCase();
   renderCats(t);
-  if(openDomain)fillRail(openDomain);
+  if(openDomain) fillRail(openDomain);
 });
-window.addEventListener("hashchange",()=>{
-  const m=location.hash.match(/^#?file\/(.+)/);
-  if(m)openCase(decodeURIComponent(m[1]));else goHome();
+window.addEventListener("hashchange",function(){
+  var h=location.hash.replace(/^#/,"");
+  if(h.indexOf("file/")===0) openCase(decodeURIComponent(h.slice(5))); else goHome();
 });
 renderCats("");
-if(location.hash.indexOf("file/")>=0){
-  const id=decodeURIComponent(location.hash.replace(/^#?file\//,""));
-  openCase(id);
-}
+if(location.hash.indexOf("file/")>=0) openCase(decodeURIComponent(location.hash.replace(/^#?file\//,"")));
 </script>
 </body>
 </html>
