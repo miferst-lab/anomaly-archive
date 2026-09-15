@@ -2,31 +2,18 @@ function commons(name) {
   return "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(name) + "?width=900";
 }
 function esc(s) {
-  return String(s)
-    .replace(/&/g, "&")
-    .replace(/</g, "<")
-    .replace(/>/g, ">")
-    .replace(/"/g, """)
-    .replace(/'/g, "&#39;");
+  var d = document.createElement("div");
+  d.textContent = String(s);
+  return d.innerHTML;
 }
 var IMG = {
   "nazca-lines": ["Nazca Lines Hummingbird.jpg", "Nazca hummingbird geoglyph"],
-  "tassili-rockart": ["Tassili.jpg", "Tassili n Ajjer plateau"],
-  "atlantis-plato": ["Athanasius Kircher's Turris Babel mappa Atlantis.jpg", "Kircher Atlantis map tradition"],
-  "hollow-earth": ["Hollow earth.jpg", "Historic hollow-earth diagram"],
-  "derinkuyu": ["Derinkuyu_Underground_City_14.jpg", "Derinkuyu underground city"],
-  "lemuria-shasta": ["Mount Shasta from Lake Siskiyou.jpg", "Mount Shasta"],
-  "shaver-mystery": ["Amazing stories 194703.jpg", "Amazing Stories cover"],
-  "rainbow-city": ["Operation Highjump 3.jpg", "Operation Highjump"],
   "roswell-1947": ["Marcel-roswell-debris 0.jpg", "Jesse Marcel with Fort Worth debris, 1947"],
+  "derinkuyu": ["Derinkuyu_Underground_City_14.jpg", "Derinkuyu underground city"],
   "voynich": ["Voynich Manuscript (129).jpg", "Voynich manuscript folio"],
-  "antikythera": ["NAMA Machine d'Anticythere 1.jpg", "Antikythera mechanism"],
-  "phaistos": ["Phaistos Disc side A.JPG", "Phaistos disc"],
-  "fatima-1917": ["Santuario de Fatima Julho 2018-3.jpg", "Sanctuary of Fatima"],
-  "nessie": ["Urquhart Castle and Loch Ness.jpg", "Loch Ness"],
   "tunguska": ["Tunguska event fallen trees.jpg", "Tunguska fallen trees"],
-  "flannan": ["Flannan Isles Lighthouse.jpg", "Flannan Isles lighthouse"],
-  "db-cooper": ["DB Cooper hijacking composite sketch.jpg", "FBI composite"]
+  "nessie": ["Urquhart Castle and Loch Ness.jpg", "Loch Ness"],
+  "fatima-1917": ["Santuario de Fatima Julho 2018-3.jpg", "Sanctuary of Fatima"]
 };
 var FALL = {
   "inner-earth": "Derinkuyu_Underground_City_14.jpg",
@@ -64,11 +51,7 @@ var DOMAINS = [
 ];
 var EXTRA = {
   "nazca-lines": [["UNESCO Nasca and Palpa", "https://whc.unesco.org/en/list/700/"]],
-  "tassili-rockart": [["UNESCO Tassili n Ajjer", "https://whc.unesco.org/en/list/179/"]],
-  "atlantis-plato": [["Perseus Timaeus", "https://www.perseus.tufts.edu/hopper/text?doc=Plat.+Tim."]],
-  "silurian-hypothesis": [["Schmidt and Frank paper", "https://www.cambridge.org/core/journals/international-journal-of-astrobiology"]],
   "roswell-1947": [["FBI Vault UFO files", "https://vault.fbi.gov/UFO"]],
-  "voynich": [["Beinecke MS 408", "https://beinecke.library.yale.edu/"]],
   "hessdalen": [["Project Hessdalen", "https://www.hessdalen.org/"]]
 };
 var PORTALS = [
@@ -150,7 +133,13 @@ function fillRail(id) {
     var p = pic(c);
     var el = document.createElement("article");
     el.className = "chip";
-    el.innerHTML = "<img src=\"" + p.src + "\" alt=\"\" /><div class=pad><div class=yr>" + c.year + "</div><h3>" + c.title + "</h3><p>" + c.summary + "</p></div>";
+    var img = document.createElement("img");
+    img.src = p.src;
+    var pad = document.createElement("div");
+    pad.className = "pad";
+    pad.innerHTML = "<div class=yr>" + esc(c.year) + "</div><h3>" + esc(c.title) + "</h3><p>" + esc(c.summary) + "</p>";
+    el.appendChild(img);
+    el.appendChild(pad);
     el.onclick = function () { openCase(c.id); };
     rail.appendChild(el);
   });
@@ -163,51 +152,128 @@ function openCase(id) {
   page.style.display = "block";
   var fb = loadFB(id), src = sourcesFor(c), p = pic(c);
   var rel = (c.related || []).map(function (rid) { return clean.find(function (x) { return x.id === rid; }); }).filter(Boolean);
-  var stars = "";
-  for (var i = 1; i <= 5; i++) stars += "<button data-r=\"" + i + "\" class=\"" + (fb.r >= i ? "on" : "") + "\">*</button>";
-  var comments = (fb.c || []).map(function (x) {
-    return "<div class=comment><div class=who>" + esc(x.w) + " - " + x.t + "</div>" + esc(x.b) + "</div>";
-  }).join("") || "<p class=note>No comments on this device.</p>";
-  var srcHtml = src.map(function (s) {
-    return "<div class=src><a href=\"" + s[1] + "\" target=_blank rel=noopener>" + esc(s[0]) + "</a><small>" + esc(s[2]) + "</small></div>";
-  }).join("");
-  var relHtml = rel.length ? "<div class=block><h3>Related files</h3>" + rel.map(function (r) {
-    return "<button data-go=\"" + r.id + "\">" + esc(r.title) + "</button>";
-  }).join("") + "</div>" : "";
-  page.innerHTML =
-    "<button class=back id=back>Back to categories</button>" +
-    "<div class=page-k>FILE " + esc(c.id) + " - " + esc(c.year) + " - " + esc(c.domain) + "</div>" +
-    "<h2>" + esc(c.title) + "</h2><div class=loc>" + esc(c.loc) + "</div>" +
-    "<img class=hero src=\"" + p.src + "\" alt=\"\" /><div class=cap>" + esc(p.cap) + "</div>" +
-    "<p class=body>" + esc(c.text || c.summary) + "</p>" +
-    "<div class=block><h3>Sources</h3>" + srcHtml + "</div>" + relHtml +
-    "<div class=block><h3>Rating</h3><div class=stars id=stars>" + stars +
-    "<span class=avg>" + (fb.r ? fb.r + " / 5" : "no rating yet") + "</span></div></div>" +
-    "<div class='block notes'><h3>Comments</h3><input id=who placeholder='Name or handle' />" +
-    "<textarea id=txt rows=4></textarea><button id=post>File comment</button>" +
-    "<p class=note>Stored in this browser only.</p><div id=clist>" + comments + "</div></div>";
-  document.getElementById("back").onclick = goHome;
-  page.querySelectorAll("[data-go]").forEach(function (b) {
-    b.onclick = function () { openCase(b.getAttribute("data-go")); };
+  page.innerHTML = "";
+  var back = document.createElement("button");
+  back.className = "back";
+  back.textContent = "Back to categories";
+  back.onclick = goHome;
+  page.appendChild(back);
+  var k = document.createElement("div");
+  k.className = "page-k";
+  k.textContent = "FILE " + c.id + " - " + c.year + " - " + c.domain;
+  page.appendChild(k);
+  var h = document.createElement("h2");
+  h.textContent = c.title;
+  page.appendChild(h);
+  var loc = document.createElement("div");
+  loc.className = "loc";
+  loc.textContent = c.loc;
+  page.appendChild(loc);
+  var hero = document.createElement("img");
+  hero.className = "hero";
+  hero.src = p.src;
+  page.appendChild(hero);
+  var cap = document.createElement("div");
+  cap.className = "cap";
+  cap.textContent = p.cap;
+  page.appendChild(cap);
+  var body = document.createElement("p");
+  body.className = "body";
+  body.textContent = c.text || c.summary;
+  page.appendChild(body);
+  var sb = document.createElement("div");
+  sb.className = "block";
+  sb.innerHTML = "<h3>Sources</h3>";
+  src.forEach(function (s) {
+    var div = document.createElement("div");
+    div.className = "src";
+    var a = document.createElement("a");
+    a.href = s[1];
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = s[0];
+    var sm = document.createElement("small");
+    sm.textContent = s[2];
+    div.appendChild(a);
+    div.appendChild(sm);
+    sb.appendChild(div);
   });
-  page.querySelectorAll("#stars button").forEach(function (b) {
-    b.onclick = function () {
-      var d = loadFB(id);
-      d.r = +b.getAttribute("data-r");
-      saveFB(id, d);
-      openCase(id);
-    };
-  });
-  document.getElementById("post").onclick = function () {
-    var w = document.getElementById("who").value.trim() || "anonymous";
-    var body = document.getElementById("txt").value.trim();
-    if (!body) return;
+  page.appendChild(sb);
+  if (rel.length) {
+    var rb = document.createElement("div");
+    rb.className = "block";
+    rb.innerHTML = "<h3>Related files</h3>";
+    rel.forEach(function (r) {
+      var btn = document.createElement("button");
+      btn.textContent = r.title;
+      btn.onclick = function () { openCase(r.id); };
+      rb.appendChild(btn);
+    });
+    page.appendChild(rb);
+  }
+  var rate = document.createElement("div");
+  rate.className = "block";
+  rate.innerHTML = "<h3>Rating</h3><div class=stars id=stars></div>";
+  page.appendChild(rate);
+  var stars = document.getElementById("stars");
+  for (var i = 1; i <= 5; i++) {
+    var st = document.createElement("button");
+    st.textContent = "*";
+    if (fb.r >= i) st.className = "on";
+    st.setAttribute("data-r", String(i));
+    st.onclick = (function (n) {
+      return function () {
+        var d = loadFB(id);
+        d.r = n;
+        saveFB(id, d);
+        openCase(id);
+      };
+    })(i);
+    stars.appendChild(st);
+  }
+  var avg = document.createElement("span");
+  avg.className = "avg";
+  avg.textContent = fb.r ? (fb.r + " / 5") : "no rating yet";
+  stars.appendChild(avg);
+  var notes = document.createElement("div");
+  notes.className = "block notes";
+  notes.innerHTML = "<h3>Comments</h3>";
+  var who = document.createElement("input");
+  who.id = "who";
+  who.placeholder = "Name or handle";
+  var txt = document.createElement("textarea");
+  txt.id = "txt";
+  txt.rows = 4;
+  var post = document.createElement("button");
+  post.textContent = "File comment";
+  post.onclick = function () {
+    var w = who.value.trim() || "anonymous";
+    var b = txt.value.trim();
+    if (!b) return;
     var d = loadFB(id);
     d.c = d.c || [];
-    d.c.unshift({ w: w, b: body, t: new Date().toISOString().slice(0, 16).replace("T", " ") });
+    d.c.unshift({ w: w, b: b, t: new Date().toISOString().slice(0, 16).replace("T", " ") });
     saveFB(id, d);
     openCase(id);
   };
+  notes.appendChild(who);
+  notes.appendChild(txt);
+  notes.appendChild(post);
+  var hint = document.createElement("p");
+  hint.className = "note";
+  hint.textContent = "Stored in this browser only.";
+  notes.appendChild(hint);
+  (fb.c || []).forEach(function (x) {
+    var cm = document.createElement("div");
+    cm.className = "comment";
+    var wh = document.createElement("div");
+    wh.className = "who";
+    wh.textContent = x.w + " - " + x.t;
+    cm.appendChild(wh);
+    cm.appendChild(document.createTextNode(x.b));
+    notes.appendChild(cm);
+  });
+  page.appendChild(notes);
   window.scrollTo(0, 0);
 }
 function goHome() {
