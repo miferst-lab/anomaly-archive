@@ -1,5 +1,26 @@
 function commons(name) {
-  return "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(name) + "?width=900";
+  var raw = "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(name);
+  return "https://images.weserv.nl/?url=" + encodeURIComponent(raw.replace("https://", "")) + "&w=900&h=480&fit=cover&we";
+}
+function posterFor(c) {
+  var d = document.createElement("div");
+  d.className = "poster";
+  d.textContent = (c && c.domain ? c.domain : "file").replace("-", " ");
+  return d;
+}
+function setImg(el, src, c) {
+  el.onerror = function () {
+    if (el.dataset.failed) {
+      var p = posterFor(c);
+      if (el.parentNode) el.parentNode.replaceChild(p, el);
+      return;
+    }
+    el.dataset.failed = "1";
+    el.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/320px-PNG_transparency_demonstration_1.png";
+    var p = posterFor(c);
+    if (el.parentNode) el.parentNode.replaceChild(p, el);
+  };
+  el.src = src;
 }
 function esc(s) {
   var d = document.createElement("div");
@@ -8,29 +29,33 @@ function esc(s) {
 }
 var IMG = {
   "nazca-lines": ["Nazca Lines Hummingbird.jpg", "Nazca hummingbird geoglyph"],
+  "tassili-rockart": ["Tassili n'Ajjer Landscape.jpg", "Tassili landscape"],
   "roswell-1947": ["Marcel-roswell-debris 0.jpg", "Jesse Marcel with Fort Worth debris, 1947"],
-  "derinkuyu": ["Derinkuyu_Underground_City_14.jpg", "Derinkuyu underground city"],
+  "derinkuyu": ["Derinkuyu Underground City.jpg", "Derinkuyu underground city"],
   "voynich": ["Voynich Manuscript (129).jpg", "Voynich manuscript folio"],
   "tunguska": ["Tunguska event fallen trees.jpg", "Tunguska fallen trees"],
   "nessie": ["Urquhart Castle and Loch Ness.jpg", "Loch Ness"],
-  "fatima-1917": ["Santuario de Fatima Julho 2018-3.jpg", "Sanctuary of Fatima"]
+  "fatima-1917": ["Sanctuary of Fatima.jpg", "Sanctuary of Fatima"],
+  "antikythera": ["NAMA Machine d'Anticythere 1.jpg", "Antikythera mechanism"],
+  "lemuria-shasta": ["Mount Shasta.jpg", "Mount Shasta"],
+  "rainbow-city": ["Operation Highjump.jpg", "Operation Highjump"]
 };
 var FALL = {
-  "inner-earth": "Derinkuyu_Underground_City_14.jpg",
-  "uap": "Night sky above Atacama Desert.jpg",
-  "uso": "Ocean waves.jpg",
-  "encounters": "Night sky above Atacama Desert.jpg",
+  "inner-earth": "Derinkuyu Underground City.jpg",
+  "uap": "ESO-VLT-Laser-phot-33a-07.jpg",
+  "uso": "Pacific Ocean.jpg",
+  "encounters": "ESO-VLT-Laser-phot-33a-07.jpg",
   "crash-retrieval": "Marcel-roswell-debris 0.jpg",
-  "nuclear": "Minuteman III ICBM.jpg",
-  "cover-up": "CIA emblem.png",
+  "nuclear": "LGM-30 Minuteman III.jpg",
+  "cover-up": "US-Original-Great-Seal-obverse.svg",
   "cryptid": "Urquhart Castle and Loch Ness.jpg",
-  "high-strangeness": "Night sky above Atacama Desert.jpg",
-  "haunt": "Borley Rectory.jpg",
-  "disappearance": "Flannan Isles Lighthouse.jpg",
+  "high-strangeness": "ESO-VLT-Laser-phot-33a-07.jpg",
+  "haunt": "Haunted house.jpg",
+  "disappearance": "Lighthouse.jpg",
   "fortean": "Tunguska event fallen trees.jpg",
   "artifact": "Nazca Lines Hummingbird.jpg",
-  "historical-sky": "Night sky above Atacama Desert.jpg",
-  "religious-anomaly": "Santuario de Fatima Julho 2018-3.jpg"
+  "historical-sky": "ESO-VLT-Laser-phot-33a-07.jpg",
+  "religious-anomaly": "Sanctuary of Fatima.jpg"
 };
 var DOMAINS = [
   ["inner-earth", "Inner Earth and lost races", "Atlantis, Agartha, Silurians, cave worlds"],
@@ -72,7 +97,7 @@ var openDomain = null;
 function pic(c) {
   if (IMG[c.id]) return { src: commons(IMG[c.id][0]), cap: IMG[c.id][1] };
   var f = FALL[c.domain] || FALL.uap;
-  return { src: commons(f), cap: "Illustrative Commons image, not evidence of the claim." };
+  return { src: commons(f), cap: "Illustrative image, not evidence of the claim." };
 }
 function wiki(u) { return /wikipedia\.org/i.test(u || ""); }
 function sourcesFor(c) {
@@ -134,7 +159,8 @@ function fillRail(id) {
     var el = document.createElement("article");
     el.className = "chip";
     var img = document.createElement("img");
-    img.src = p.src;
+    img.alt = "";
+    setImg(img, p.src, c);
     var pad = document.createElement("div");
     pad.className = "pad";
     pad.innerHTML = "<div class=yr>" + esc(c.year) + "</div><h3>" + esc(c.title) + "</h3><p>" + esc(c.summary) + "</p>";
@@ -162,16 +188,17 @@ function openCase(id) {
   k.className = "page-k";
   k.textContent = "FILE " + c.id + " - " + c.year + " - " + c.domain;
   page.appendChild(k);
-  var h = document.createElement("h2");
-  h.textContent = c.title;
-  page.appendChild(h);
+  var h2 = document.createElement("h2");
+  h2.textContent = c.title;
+  page.appendChild(h2);
   var loc = document.createElement("div");
   loc.className = "loc";
   loc.textContent = c.loc;
   page.appendChild(loc);
   var hero = document.createElement("img");
   hero.className = "hero";
-  hero.src = p.src;
+  hero.alt = "";
+  setImg(hero, p.src, c);
   page.appendChild(hero);
   var cap = document.createElement("div");
   cap.className = "cap";
@@ -220,7 +247,6 @@ function openCase(id) {
     var st = document.createElement("button");
     st.textContent = "*";
     if (fb.r >= i) st.className = "on";
-    st.setAttribute("data-r", String(i));
     st.onclick = (function (n) {
       return function () {
         var d = loadFB(id);
@@ -239,10 +265,8 @@ function openCase(id) {
   notes.className = "block notes";
   notes.innerHTML = "<h3>Comments</h3>";
   var who = document.createElement("input");
-  who.id = "who";
   who.placeholder = "Name or handle";
   var txt = document.createElement("textarea");
-  txt.id = "txt";
   txt.rows = 4;
   var post = document.createElement("button");
   post.textContent = "File comment";
