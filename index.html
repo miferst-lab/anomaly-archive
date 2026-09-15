@@ -14,10 +14,11 @@ header{border-bottom:1px solid var(--line);padding:16px 22px 12px;display:flex;j
 .brand h1{font-size:14px;letter-spacing:.28em;color:var(--amber);font-weight:600}
 .brand p{font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
 .meta{text-align:right;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--cyan)}
+.meta button{background:#15202c;border:1px solid var(--cyan);color:var(--cyan);padding:5px 8px;margin-left:8px;cursor:pointer;font-size:10px;letter-spacing:.12em}
 .lcars{height:7px;background:linear-gradient(90deg,var(--lcars) 0 18%,transparent 18% 20%,#3d6ea8 20% 46%,transparent 46% 48%,var(--green) 48% 62%,transparent 62% 64%,#8b3a3a 64% 100%)}
 .search{width:100%;max-width:420px;background:#0d141d;border:1px solid var(--line);color:var(--text);padding:10px 12px;margin:16px 22px 0}
-#home,#page{position:relative;z-index:1}
-#page{display:none;padding:22px 22px 80px;max-width:920px}
+#home,#page,#nexus-wrap{position:relative;z-index:1}
+#page,#nexus-wrap{display:none;padding:22px 22px 80px}
 #home{padding:18px 22px 80px}
 h2.sec{font-size:11px;letter-spacing:.2em;color:var(--amber-dim);margin:8px 0 12px}
 .cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
@@ -56,6 +57,16 @@ h2.sec{font-size:11px;letter-spacing:.2em;color:var(--amber-dim);margin:8px 0 12
 .comment .who{color:var(--amber);font-size:12px}
 .note{font-size:12px;color:var(--amber-dim);margin-top:8px}
 footer{border-top:1px solid var(--line);padding:14px 22px;font-size:12px;color:var(--muted)}
+#nx-map,#nx-time{background:#070b10;border:1px solid var(--line);margin:8px 0}
+.nx-dot{cursor:pointer}
+.nx-legend{font-size:11px;color:var(--muted);margin:8px 0 12px}
+.nx-legend span{display:inline-block;width:10px;height:10px;margin:0 6px 0 12px;vertical-align:middle}
+.nx-legend .c1{background:#6ee7e0}
+.nx-legend .c2{background:#e8b86d}
+.nx-legend .c3{background:#3d4a58}
+.nx-cap{font-size:11px;color:var(--muted);margin-bottom:10px}
+.nx-info{border:1px solid var(--line);padding:12px;background:#0a1119;font-size:14px;line-height:1.5}
+.nx-open{margin-left:8px;background:#15202c;border:1px solid var(--cyan);color:var(--cyan);padding:4px 8px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -64,7 +75,9 @@ footer{border-top:1px solid var(--line);padding:14px 22px;font-size:12px;color:v
     <div class="sigil">AA</div>
     <div><h1>THE ARCHIVE</h1><p>Aerospace Anomalous Unresolved</p></div>
   </div>
-  <div class="meta">EN FILES <span id="filecount">000</span></div>
+  <div class="meta">EN FILES <span id="filecount">000</span>
+    <button type="button" id="btnNexus">NEXUS</button>
+  </div>
 </header>
 <div class="lcars"></div>
 <section id="home">
@@ -77,6 +90,11 @@ footer{border-top:1px solid var(--line);padding:14px 22px;font-size:12px;color:v
   </div>
 </section>
 <section id="page"></section>
+<section id="nexus-wrap">
+  <button class="back" id="nxBack">Back to categories</button>
+  <h2 class="sec">Nexus — time and place</h2>
+  <div id="nexus"></div>
+</section>
 <footer>Illustrative images. Ratings stay on this device.</footer>
 <script src="data-0.js"></script>
 <script src="data-1.js"></script>
@@ -85,6 +103,8 @@ footer{border-top:1px solid var(--line);padding:14px 22px;font-size:12px;color:v
 <script src="data-4.js"></script>
 <script src="data-5.js"></script>
 <script src="data-6.js"></script>
+<script src="geo.js"></script>
 <script src="app.js?v=4"></script>
+<script src="nexus.js?v=1"></script>
 </body>
 </html>
