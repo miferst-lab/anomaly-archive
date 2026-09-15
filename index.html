@@ -29,12 +29,13 @@ h2.sec{font-size:11px;letter-spacing:.2em;color:var(--amber-dim);margin:8px 0 12
 .rail-wrap.open{display:block}
 .rail{display:flex;gap:10px;overflow-x:auto;padding:8px 2px 14px}
 .chip{min-width:250px;max-width:280px;background:#0a1119;border:1px solid var(--line);cursor:pointer;overflow:hidden}
-.chip img{width:100%;height:120px;object-fit:cover;display:block;background:#070b10}
+.chip img,.chip .poster,.hero,.page .poster{width:100%;height:120px;object-fit:cover;display:block;background:linear-gradient(135deg,#12202e,#0a1018 55%,#1a140c)}
+.page .poster,.hero{height:280px}
+.poster{display:flex;align-items:flex-end;padding:10px;color:var(--amber);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
 .chip .pad{padding:12px}
 .chip .yr{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--cyan)}
 .chip h3{font-size:15px;margin:6px 0 4px}
 .chip p{font-size:12px;color:#b7c4d1;line-height:1.4}
-.hero{width:100%;max-height:380px;object-fit:cover;border:1px solid var(--line);margin:12px 0 6px}
 .cap{font-size:11px;color:var(--muted);margin-bottom:14px}
 .back{background:none;border:1px solid var(--line);color:var(--text);padding:6px 10px;cursor:pointer;margin-bottom:14px}
 .page-k{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--cyan)}
@@ -84,6 +85,6 @@ footer{border-top:1px solid var(--line);padding:14px 22px;font-size:12px;color:v
 <script src="data-4.js"></script>
 <script src="data-5.js"></script>
 <script src="data-6.js"></script>
-<script src="app.js?v=3"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>
