@@ -76,14 +76,16 @@ footer{border-top:1px solid var(--line);padding:14px 22px;font-size:12px;color:v
   </div>
 </section>
 <section id="page"></section>
-<footer>Seed archive. Ratings and comments stay on this device until a server is added. Sources exclude Wikipedia.</footer>
+<footer>Seed archive. Ratings and comments stay on this device. Sources exclude Wikipedia.</footer>
 <script src="data-0.js"></script>
 <script src="data-1.js"></script>
 <script src="data-2.js"></script>
 <script src="data-3.js"></script>
 <script src="data-4.js"></script>
+<script src="data-5.js"></script>
 <script>
 const DOMAINS = [
+  ["inner-earth","Inner Earth & lost races","Atlantis, Agartha, Silurians, cave worlds"],
   ["uap","UAP / aerial","Radar, pilots, photographs"],
   ["uso","USO / transmedium","Water entries and undersea reports"],
   ["encounters","Close encounters","Entity and landing reports"],
@@ -100,35 +102,31 @@ const DOMAINS = [
   ["religious-anomaly","Religious anomalies","Apparitions and crowd events"]
 ];
 const EXTRA = {
-  "nimitz-2004":[["AARO","https://www.aaro.mil/"],["The Debrief","https://thedebrief.org/"]],
-  "roswell-1947":[["FBI Vault UFO files","https://vault.fbi.gov/UFO"],["National Archives UFO records","https://www.archives.gov/research/military/air-force/ufos"]],
+  "atlantis-plato":[["Perseus Timaeus","https://www.perseus.tufts.edu/hopper/text?doc=Plat.+Tim."],["Donnelly 1882 scan","https://archive.org/details/atlantisantedilu00donn"]],
+  "silurian-hypothesis":[["Schmidt & Frank paper","https://www.cambridge.org/core/journals/international-journal-of-astrobiology/article/silurian-hypothesis-would-it-be-possible-to-detect-an-industrial-civilization-in-the-geological-record/DE45552CB4B781FFCCBA83F807CC76DB"],["The Atlantic on the paper","https://www.theatlantic.com/science/archive/2018/04/are-we-earths-only-civilization/557180/"]],
+  "agartha":[["Ossendowski scan","https://archive.org/details/beastsmenandgod00ossegoog"],["Roerich Museum","https://www.roerich.org/"]],
+  "shaver-mystery":[["I Remember Lemuria scan","https://archive.org/details/IRememberLemuria"],["Amazing Stories library","https://archive.org/details/amazing-stories-library"]],
+  "derinkuyu":[["UNESCO Goreme / Cappadocia","https://whc.unesco.org/en/list/357/"]],
+  "lemuria-shasta":[["USGS Mount Shasta","https://www.usgs.gov/volcanoes/mount-shasta"]],
+  "dulce-base":[["FBI Vault UFO files","https://vault.fbi.gov/UFO"]],
+  "hollow-earth":[["NARA Byrd papers path","https://www.archives.gov/"]],
+  "nimitz-2004":[["AARO","https://www.aaro.mil/"]],
+  "roswell-1947":[["FBI Vault UFO files","https://vault.fbi.gov/UFO"],["NARA UFO records","https://www.archives.gov/research/military/air-force/ufos"]],
   "rendlesham-1980":[["UK National Archives UFO files","https://www.nationalarchives.gov.uk/ufos/"]],
-  "malmstrom-1967":[["Robert Hastings archive","https://www.ufohastings.com/"]],
-  "minot-1968":[["Minot B-52 documentation project","https://minotb52ufo.com/"]],
-  "cash-landrum-1980":[["UAPRAD case note","https://uaprad.org/research"]],
+  "minot-1968":[["Minot B-52 project","https://minotb52ufo.com/"]],
   "hessdalen":[["Project Hessdalen","https://www.hessdalen.org/"]],
-  "calvine-1990":[["David Clarke research","https://drdavidclarke.co.uk/"]],
-  "robertson-panel":[["CIA Reading Room","https://www.cia.gov/readingroom/"]],
   "majestic-12":[["FBI Vault MJ-12","https://vault.fbi.gov/Majestic%2012"]],
-  "blue-book":[["NARA Project Blue Book","https://www.archives.gov/research/military/air-force/ufos"]],
   "db-cooper":[["FBI Vault NORJAK","https://vault.fbi.gov/D.B.%20Cooper%20"]],
-  "antikythera":[["Antikythera Mechanism Research Project","https://www.antikythera-mechanism.gr/"]],
-  "voynich":[["Beinecke Library MS 408","https://beinecke.library.yale.edu/"]],
-  "fatima-1917":[["Sanctuary of Fatima","https://www.fatima.pt/en"]],
-  "knock-1879":[["Knock Shrine history","https://www.knockshrine.ie/history/"]],
-  "enfield":[["Society for Psychical Research","https://www.spr.ac.uk/"]],
-  "borley":[["SPR collections","https://www.spr.ac.uk/"]],
-  "bigfoot":[["BFRO report database","https://www.bfro.net/"]]
+  "voynich":[["Beinecke MS 408","https://beinecke.library.yale.edu/"]],
+  "enfield":[["SPR","https://www.spr.ac.uk/"]]
 };
 const PORTALS = [
+  ["Internet Archive primary scans","https://archive.org/"],
   ["NICAP scanned files","https://www.nicap.org/"],
   ["NARA aerial phenomena","https://www.archives.gov/research/military/air-force/ufos"],
-  ["FBI Vault UFO collection","https://vault.fbi.gov/UFO"],
-  ["AARO","https://www.aaro.mil/"],
-  ["UAPRAD","https://uaprad.org/research"],
-  ["Incident index","https://nloresource.com/incidents"]
+  ["FBI Vault UFO collection","https://vault.fbi.gov/UFO"]
 ];
-const clean = (window.CASES||[]).filter(c=>c.id&&c.title);
+const clean = (window.CASES||[]).filter(function(c){return c.id&&c.title;});
 document.getElementById("filecount").textContent=String(clean.length).padStart(3,"0");
 const catsEl=document.getElementById("cats");
 const rail=document.getElementById("rail");
@@ -137,16 +135,16 @@ const railtitle=document.getElementById("railtitle");
 const home=document.getElementById("home");
 const page=document.getElementById("page");
 let openDomain=null;
-function wiki(u){return /wikipedia\.org/i.test(u||"")}
+function wiki(u){return /wikipedia\.org/i.test(u||"");}
 function sourcesFor(c){
   const out=[];
   (c.sources||[]).forEach(function(s){ if(s&&s.u&&!wiki(s.u)) out.push([s.n,s.u,"case file"]); });
   (EXTRA[c.id]||[]).forEach(function(s){ out.push([s[0],s[1],"specialist"]); });
-  if(out.length<3) PORTALS.slice(0,4).forEach(function(s){ out.push([s[0],s[1],"portal"]); });
+  if(out.length<3) PORTALS.forEach(function(s){ out.push([s[0],s[1],"portal"]); });
   const seen={};
   return out.filter(function(x){ if(seen[x[1]]) return false; seen[x[1]]=1; return true; }).slice(0,6);
 }
-function storeKey(id){return "aa-"+id}
+function storeKey(id){return "aa-"+id;}
 function loadFB(id){
   try{return JSON.parse(localStorage.getItem(storeKey(id))||'{"r":0,"c":[]}');}catch(e){return {r:0,c:[]};}
 }
@@ -163,7 +161,7 @@ function renderCats(term){
     if(term&&!n) return;
     var b=document.createElement("button");
     b.className="cat"+(openDomain===id?" active":"");
-    b.innerHTML="<b>"+label+"</b><span>"+n+" files · "+blurb+"</span>";
+    b.innerHTML="<b>"+label+"</b><span>"+n+" files \u00b7 "+blurb+"</span>";
     b.onclick=function(){toggleDomain(id,label);};
     catsEl.appendChild(b);
   });
@@ -171,7 +169,7 @@ function renderCats(term){
 function toggleDomain(id,label){
   if(openDomain===id){ openDomain=null; railwrap.classList.remove("open"); renderCats(document.getElementById("q").value.trim().toLowerCase()); return; }
   openDomain=id;
-  railtitle.textContent=label+" — cases";
+  railtitle.textContent=label+" \u2014 cases";
   fillRail(id);
   railwrap.classList.add("open");
   renderCats(document.getElementById("q").value.trim().toLowerCase());
@@ -188,7 +186,15 @@ function fillRail(id){
     rail.appendChild(el);
   });
 }
-function esc(s){return String(s).replace(/[&<>"']/g,function(m){return ({'&':'&','<':'<','>':'>','"':'"',"'":'&#39;'})[m];});}
+function esc(s){
+  return String(s).replace(/[&<>"']/g, function(m){
+    if(m==="&") return "&";
+    if(m==="<") return "<";
+    if(m===">") return ">";
+    if(m==="\"") return """;
+    return "&#39;";
+  });
+}
 function openCase(id){
   var c=clean.find(function(x){return x.id===id;}); if(!c) return;
   location.hash="file/"+id;
@@ -198,11 +204,11 @@ function openCase(id){
   var src=sourcesFor(c);
   var rel=(c.related||[]).map(function(rid){return clean.find(function(x){return x.id===rid;});}).filter(Boolean);
   var stars="";
-  for(var i=1;i<=5;i++) stars+="<button data-r='"+i+"' class='"+(fb.r>=i?"on":"")+"'>★</button>";
-  var comments=(fb.c||[]).map(function(x){return "<div class=comment><div class=who>"+esc(x.w)+" · "+x.t+"</div>"+esc(x.b)+"</div>";}).join("") || "<p class=note>No comments on this device.</p>";
-  var srcHtml=src.map(function(s){return "<div class=src><a href='"+s[1]+"' target=_blank rel=noopener>"+s[0]+"</a><small>"+s[2]+" · "+s[1].replace(/^https?:\/\//,"")+"</small></div>";}).join("");
-  var relHtml=rel.length?"<div class=block><h3>Related files</h3><div class=rel>"+rel.map(function(r){return "<button data-go='"+r.id+"'>"+r.title+"</button>";}).join("")+"</div></div>":"";
-  page.innerHTML="<button class=back id=back>← Categories</button><div class=page-k>FILE "+c.id+" · "+c.year+" · "+c.domain+"</div><h2>"+c.title+"</h2><div class=loc>"+c.loc+"</div><p class=body>"+(c.text||c.summary)+"</p><div class=block><h3>Sources</h3>"+srcHtml+"<p class=note>Wikipedia omitted. Portals are starting points, not proof.</p></div>"+relHtml+"<div class=block><h3>Rating</h3><div class=stars id=stars>"+stars+"<span class=avg>"+(fb.r?fb.r+" / 5 on this device":"no rating yet")+"</span></div></div><div class='block notes'><h3>Comments</h3><input id=who placeholder='Name or handle' /><textarea id=txt rows=4 placeholder='Field note, source tip, disagreement…'></textarea><button id=post>File comment</button><p class=note>Stored in this browser only.</p><div id=clist>"+comments+"</div></div>";
+  for(var i=1;i<=5;i++) stars+="<button data-r='"+i+"' class='"+(fb.r>=i?"on":"")+"'>\u2605</button>";
+  var comments=(fb.c||[]).map(function(x){return "<div class=comment><div class=who>"+esc(x.w)+" \u00b7 "+x.t+"</div>"+esc(x.b)+"</div>";}).join("") || "<p class=note>No comments on this device.</p>";
+  var srcHtml=src.map(function(s){return "<div class=src><a href='"+s[1]+"' target=_blank rel=noopener>"+esc(s[0])+"</a><small>"+esc(s[2])+" \u00b7 "+esc(s[1].replace(/^https?:\/\//,""))+"</small></div>";}).join("");
+  var relHtml=rel.length?"<div class=block><h3>Related files</h3><div class=rel>"+rel.map(function(r){return "<button data-go='"+r.id+"'>"+esc(r.title)+"</button>";}).join("")+"</div></div>":"";
+  page.innerHTML="<button class=back id=back>\u2190 Categories</button><div class=page-k>FILE "+esc(c.id)+" \u00b7 "+esc(c.year)+" \u00b7 "+esc(c.domain)+"</div><h2>"+esc(c.title)+"</h2><div class=loc>"+esc(c.loc)+"</div><p class=body>"+esc(c.text||c.summary)+"</p><div class=block><h3>Sources</h3>"+srcHtml+"<p class=note>Wikipedia omitted. Portals are starting points, not proof.</p></div>"+relHtml+"<div class=block><h3>Rating</h3><div class=stars id=stars>"+stars+"<span class=avg>"+(fb.r?fb.r+" / 5 on this device":"no rating yet")+"</span></div></div><div class='block notes'><h3>Comments</h3><input id=who placeholder='Name or handle' /><textarea id=txt rows=4 placeholder='Field note, source tip, disagreement'></textarea><button id=post>File comment</button><p class=note>Stored in this browser only.</p><div id=clist>"+comments+"</div></div>";
   document.getElementById("back").onclick=goHome;
   page.querySelectorAll("[data-go]").forEach(function(b){ b.onclick=function(){openCase(b.getAttribute("data-go"));}; });
   page.querySelectorAll("#stars button").forEach(function(b){ b.onclick=function(){ var d=loadFB(id); d.r=+b.getAttribute("data-r"); saveFB(id,d); openCase(id); }; });
