@@ -7,7 +7,7 @@
 <style>
 :root{--void:#05070a;--panel:#0b1018;--line:#1c2a3a;--amber:#e8b86d;--amber-dim:#8a6a38;--cyan:#6ee7e0;--green:#7dffb3;--text:#d7e2ee;--muted:#7d8c9d;--lcars:#c97b3a}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--void);color:var(--text);font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif;min-height:100%}
+html,body{background:var(--void);color:var(--text);font-family:Segoe UI,Helvetica Neue,Arial,sans-serif;min-height:100%}
 body::before{content:"";pointer-events:none;position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.12) 3px);opacity:.3;z-index:50}
 header{border-bottom:1px solid var(--line);padding:16px 22px 12px;display:flex;justify-content:space-between;gap:12px;align-items:center;background:#101822;position:sticky;top:0;z-index:40}
 .brand{display:flex;align-items:center;gap:12px;cursor:pointer}
@@ -28,8 +28,8 @@ h2.sec{font-size:11px;letter-spacing:.2em;color:var(--amber-dim);margin:8px 0 12
 .cat span{font-size:11px;color:var(--muted)}
 .rail-wrap{margin-top:18px;display:none}
 .rail-wrap.open{display:block}
-.rail{display:flex;gap:10px;overflow-x:auto;padding:8px 2px 14px;scroll-snap-type:x mandatory}
-.chip{min-width:250px;max-width:280px;scroll-snap-align:start;background:#0a1119;border:1px solid var(--line);cursor:pointer;overflow:hidden}
+.rail{display:flex;gap:10px;overflow-x:auto;padding:8px 2px 14px}
+.chip{min-width:250px;max-width:280px;background:#0a1119;border:1px solid var(--line);cursor:pointer;overflow:hidden}
 .chip img{width:100%;height:120px;object-fit:cover;display:block;background:#070b10}
 .chip .pad{padding:12px}
 .chip .yr{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--cyan)}
@@ -63,13 +63,13 @@ footer{border-top:1px solid var(--line);padding:14px 22px;font-size:12px;color:v
 <header>
   <div class="brand" id="goHome">
     <div class="sigil">AA</div>
-    <div><h1>THE ARCHIVE</h1><p>Aerospace · Anomalous · Unresolved</p></div>
+    <div><h1>THE ARCHIVE</h1><p>Aerospace Anomalous Unresolved</p></div>
   </div>
-  <div class="meta">EN · FILES <span id="filecount">—</span></div>
+  <div class="meta">EN FILES <span id="filecount">000</span></div>
 </header>
 <div class="lcars"></div>
 <section id="home">
-  <input class="search" id="q" placeholder="Search designation, place, year…" />
+  <input class="search" id="q" placeholder="Search designation, place, year" />
   <h2 class="sec">Categories</h2>
   <div class="cats" id="cats"></div>
   <div class="rail-wrap" id="railwrap">
@@ -78,7 +78,7 @@ footer{border-top:1px solid var(--line);padding:14px 22px;font-size:12px;color:v
   </div>
 </section>
 <section id="page"></section>
-<footer>Images: Wikimedia Commons (illustrative). Ratings stay on this device. Wikipedia omitted from source lists.</footer>
+<footer>Images from Wikimedia Commons are illustrative. Ratings stay on this device.</footer>
 <script src="data-0.js"></script>
 <script src="data-1.js"></script>
 <script src="data-2.js"></script>
@@ -86,171 +86,6 @@ footer{border-top:1px solid var(--line);padding:14px 22px;font-size:12px;color:v
 <script src="data-4.js"></script>
 <script src="data-5.js"></script>
 <script src="data-6.js"></script>
-<script>
-function commons(name){return "https://commons.wikimedia.org/wiki/Special:FilePath/"+encodeURIComponent(name)+"?width=900";}
-const IMG = {
-  "nazca-lines":["Nazca Lines Hummingbird.jpg","Nazca hummingbird geoglyph, aerial photograph"],
-  "tassili-rockart":["Tassili.jpg","Tassili n'Ajjer plateau and rock-art landscape"],
-  "atlantis-plato":["Athanasius Kircher's Turris Babel mappa Atlantis.jpg","Kircher map tradition of Atlantis (early modern reconstruction)"],
-  "hollow-earth":["Hollow earth.jpg","Historic hollow-earth diagram"],
-  "derinkuyu":["Derinkuyu_Underground_City_14.jpg","Derinkuyu underground city, Cappadocia"],
-  "lemuria-shasta":["Mount Shasta from Lake Siskiyou.jpg","Mount Shasta"],
-  "shaver-mystery":["Amazing stories 194703.jpg","Amazing Stories cover, Shaver-era pulp"],
-  "rainbow-city":["Operation Highjump 3.jpg","Operation Highjump, Antarctica"],
-  "roswell-1947":["Marcel-roswell-debris 0.jpg","Maj. Jesse Marcel with Fort Worth debris, 8 July 1947"],
-  "nuremberg-1561":["Himmelserscheinung über Nürnberg 1561.jpg","1561 Nuremberg celestial broadsheet"],
-  "basel-1566":["Basel 1566.jpg","1566 Basel celestial broadsheet"],
-  "voynich":["Voynich Manuscript (129).jpg","Voynich manuscript folio"],
-  "antikythera":["NAMA Machine d'Anticythère 1.jpg","Antikythera mechanism fragment"],
-  "phaistos":["Phaistos Disc side A.JPG","Phaistos disc, side A"],
-  "fatima-1917":["Santuario de Fatima Julho 2018-3.jpg","Sanctuary of Fátima"],
-  "knock-1879":["Knock Shrine.jpg","Knock Shrine"],
-  "nessie":["Urquhart Castle and Loch Ness.jpg","Loch Ness and Urquhart Castle"],
-  "bigfoot":["Patterson–Gimlin film frame 352.png","Patterson–Gimlin film frame (contested)"],
-  "hessdalen":["Hessdalen.jpg","Hessdalen valley"],
-  "tunguska":["Tunguska event fallen trees.jpg","Trees felled at Tunguska"],
-  "db-cooper":["DB Cooper hijacking composite sketch.jpg","FBI composite, NORJAK"],
-  "mh370":["Indian Ocean - en.png","Indian Ocean basin (search theatre)"],
-  "enfield":["Enfield_poltergeist_house.jpg","Enfield house (if file exists; else fallback)"],
-  "flannan":["Flannan Isles Lighthouse.jpg","Flannan Isles lighthouse"],
-  "dyatlov":["Dyatlov Pass.jpg","Dyatlov Pass terrain"]
-};
-const FALL = {
-  "inner-earth":"Derinkuyu_Underground_City_14.jpg",
-  "uap":"Night sky above Atacama Desert.jpg",
-  "uso":"Ocean waves.jpg",
-  "encounters":"Night sky above Atacama Desert.jpg",
-  "crash-retrieval":"Marcel-roswell-debris 0.jpg",
-  "nuclear":"Minuteman III ICBM.jpg",
-  "cover-up":"CIA emblem.png",
-  "cryptid":"Urquhart Castle and Loch Ness.jpg",
-  "high-strangeness":"Night sky above Atacama Desert.jpg",
-  "haunt":"Borley Rectory.jpg",
-  "disappearance":"Flannan Isles Lighthouse.jpg",
-  "fortean":"Tunguska event fallen trees.jpg",
-  "artifact":"Nazca Lines Hummingbird.jpg",
-  "historical-sky":"Himmelserscheinung über Nürnberg 1561.jpg",
-  "religious-anomaly":"Santuario de Fatima Julho 2018-3.jpg"
-};
-const CAP = {fallback:"Illustrative Commons image — not evidence of the claim."};
-const DOMAINS = [
-  ["inner-earth","Inner Earth & lost races","Atlantis, Agartha, Silurians, cave worlds"],
-  ["uap","UAP / aerial","Radar, pilots, photographs"],
-  ["uso","USO / transmedium","Water entries and undersea reports"],
-  ["encounters","Close encounters","Entity and landing reports"],
-  ["crash-retrieval","Crash & retrieval","Debris and recovery narratives"],
-  ["nuclear","Nuclear & strategic","Missile fields and weapons sites"],
-  ["cover-up","Programs & cover","Official programs and contested papers"],
-  ["cryptid","Cryptids","Unverified animals"],
-  ["high-strangeness","High strangeness","Overlapping anomaly clusters"],
-  ["haunt","Hauntings","Residences and investigations"],
-  ["disappearance","Disappearances","Vanishing persons and places"],
-  ["fortean","Fortean","Falls, hums, recurrent lights"],
-  ["artifact","Artifacts","Nazca, devices, unread objects"],
-  ["historical-sky","Pre-modern skies","Broadsheets and portent literature"],
-  ["religious-anomaly","Religious anomalies","Apparitions and crowd events"]
-];
-const EXTRA = {
-  "nazca-lines":[["UNESCO Nasca and Palpa","https://whc.unesco.org/en/list/700/"],["Smithsonian drone-survey note","https://www.smithsonianmag.com/smart-news/dozens-new-nazca-lines-discovered-peruvian-desert-180973926/"]],
-  "tassili-rockart":[["UNESCO Tassili n'Ajjer","https://whc.unesco.org/en/list/179/"]],
-  "atlantis-plato":[["Perseus Timaeus","https://www.perseus.tufts.edu/hopper/text?doc=Plat.+Tim."]],
-  "silurian-hypothesis":[["Schmidt & Frank paper","https://www.cambridge.org/core/journals/international-journal-of-astrobiology/article/silurian-hypothesis-would-it-be-possible-to-detect-an-industrial-civilization-in-the-geological-record/DE45552CB4B781FFCCBA83F807CC76DB"]],
-  "roswell-1947":[["FBI Vault UFO files","https://vault.fbi.gov/UFO"]],
-  "voynich":[["Beinecke MS 408","https://beinecke.library.yale.edu/"]],
-  "hessdalen":[["Project Hessdalen","https://www.hessdalen.org/"]]
-};
-const PORTALS = [["Internet Archive","https://archive.org/"],["NICAP","https://www.nicap.org/"],["NARA UFO records","https://www.archives.gov/research/military/air-force/ufos"]];
-const clean = (window.CASES||[]).filter(function(c){return c.id&&c.title;});
-document.getElementById("filecount").textContent=String(clean.length).padStart(3,"0");
-const catsEl=document.getElementById("cats");
-const rail=document.getElementById("rail");
-const railwrap=document.getElementById("railwrap");
-const railtitle=document.getElementById("railtitle");
-const home=document.getElementById("home");
-const page=document.getElementById("page");
-let openDomain=null;
-function pic(c){
-  if(IMG[c.id]) return {src:commons(IMG[c.id][0]),cap:IMG[c.id][1]};
-  var f=FALL[c.domain]||FALL.uap;
-  return {src:commons(f),cap:CAP.fallback};
-}
-function wiki(u){return /wikipedia\.org/i.test(u||"");}
-function sourcesFor(c){
-  const out=[];
-  (c.sources||[]).forEach(function(s){ if(s&&s.u&&!wiki(s.u)) out.push([s.n,s.u,"case file"]); });
-  (EXTRA[c.id]||[]).forEach(function(s){ out.push([s[0],s[1],"specialist"]); });
-  if(out.length<3) PORTALS.forEach(function(s){ out.push([s[0],s[1],"portal"]); });
-  const seen={};
-  return out.filter(function(x){ if(seen[x[1]]) return false; seen[x[1]]=1; return true; }).slice(0,6);
-}
-function storeKey(id){return "aa-"+id;}
-function loadFB(id){ try{return JSON.parse(localStorage.getItem(storeKey(id))||'{"r":0,"c":[]}');}catch(e){return {r:0,c:[]};} }
-function saveFB(id,data){localStorage.setItem(storeKey(id),JSON.stringify(data));}
-function match(c,term){
-  if(!term) return true;
-  return (c.title+" "+c.loc+" "+c.year+" "+c.summary+" "+(c.tags||[]).join(" ")).toLowerCase().includes(term);
-}
-function renderCats(term){
-  catsEl.innerHTML="";
-  DOMAINS.forEach(function(d){
-    var id=d[0],label=d[1],blurb=d[2];
-    var n=clean.filter(function(c){return c.domain===id && match(c,term);}).length;
-    if(term&&!n) return;
-    var b=document.createElement("button");
-    b.className="cat"+(openDomain===id?" active":"");
-    b.innerHTML="<b>"+label+"</b><span>"+n+" files \u00b7 "+blurb+"</span>";
-    b.onclick=function(){toggleDomain(id,label);};
-    catsEl.appendChild(b);
-  });
-}
-function toggleDomain(id,label){
-  if(openDomain===id){ openDomain=null; railwrap.classList.remove("open"); renderCats(document.getElementById("q").value.trim().toLowerCase()); return; }
-  openDomain=id; railtitle.textContent=label+" \u2014 cases"; fillRail(id); railwrap.classList.add("open");
-  renderCats(document.getElementById("q").value.trim().toLowerCase());
-  railwrap.scrollIntoView({behavior:"smooth",block:"nearest"});
-}
-function fillRail(id){
-  var term=document.getElementById("q").value.trim().toLowerCase();
-  rail.innerHTML="";
-  clean.filter(function(c){return c.domain===id&&match(c,term);}).forEach(function(c){
-    var p=pic(c);
-    var el=document.createElement("article");
-    el.className="chip";
-    el.innerHTML="<img src='"+p.src+"' alt='' /><div class=pad><div class=yr>"+c.year+"</div><h3>"+c.title+"</h3><p>"+c.summary+"</p></div>";
-    el.onclick=function(){openCase(c.id);};
-    rail.appendChild(el);
-  });
-}
-function esc(s){
-  return String(s).replace(/[&<>"']/g,function(m){
-    if(m==="&") return "&"; if(m==="<") return "<"; if(m===">") return ">"; if(m==="\"") return """; return "&#39;";
-  });
-}
-function openCase(id){
-  var c=clean.find(function(x){return x.id===id;}); if(!c) return;
-  location.hash="file/"+id; home.style.display="none"; page.style.display="block";
-  var fb=loadFB(id), src=sourcesFor(c), p=pic(c);
-  var rel=(c.related||[]).map(function(rid){return clean.find(function(x){return x.id===rid;});}).filter(Boolean);
-  var stars=""; for(var i=1;i<=5;i++) stars+="<button data-r='"+i+"' class='"+(fb.r>=i?"on":"")+"'>\u2605</button>";
-  var comments=(fb.c||[]).map(function(x){return "<div class=comment><div class=who>"+esc(x.w)+" \u00b7 "+x.t+"</div>"+esc(x.b)+"</div>";}).join("")||"<p class=note>No comments on this device.</p>";
-  var srcHtml=src.map(function(s){return "<div class=src><a href='"+s[1]+"' target=_blank rel=noopener>"+esc(s[0])+"</a><small>"+esc(s[2])+" \u00b7 "+esc(s[1].replace(/^https?:\/\//,""))+"</small></div>";}).join("");
-  var relHtml=rel.length?"<div class=block><h3>Related files</h3>"+rel.map(function(r){return "<button data-go='"+r.id+"'>"+esc(r.title)+"</button>";}).join("")+"</div>":"";
-  page.innerHTML="<button class=back id=back>\u2190 Categories</button><div class=page-k>FILE "+esc(c.id)+" \u00b7 "+esc(c.year)+" \u00b7 "+esc(c.domain)+"</div><h2>"+esc(c.title)+"</h2><div class=loc>"+esc(c.loc)+"</div><img class=hero src='"+p.src+"' alt='' /><div class=cap>"+esc(p.cap)+"</div><p class=body>"+esc(c.text||c.summary)+"</p><div class=block><h3>Sources</h3>"+srcHtml+"<p class=note>Wikipedia omitted.</p></div>"+relHtml+"<div class=block><h3>Rating</h3><div class=stars id=stars>"+stars+"<span class=avg>"+(fb.r?fb.r+" / 5":"no rating yet")+"</span></div></div><div class='block notes'><h3>Comments</h3><input id=who placeholder='Name or handle' /><textarea id=txt rows=4></textarea><button id=post>File comment</button><p class=note>Stored in this browser only.</p><div id=clist>"+comments+"</div></div>";
-  document.getElementById("back").onclick=goHome;
-  page.querySelectorAll("[data-go]").forEach(function(b){b.onclick=function(){openCase(b.getAttribute("data-go"));};});
-  page.querySelectorAll("#stars button").forEach(function(b){b.onclick=function(){var d=loadFB(id);d.r=+b.getAttribute("data-r");saveFB(id,d);openCase(id);};});
-  document.getElementById("post").onclick=function(){
-    var w=document.getElementById("who").value.trim()||"anonymous"; var b=document.getElementById("txt").value.trim(); if(!b)return;
-    var d=loadFB(id); d.c=d.c||[]; d.c.unshift({w:w,b:b,t:new Date().toISOString().slice(0,16).replace("T"," ")}); saveFB(id,d); openCase(id);
-  };
-  window.scrollTo(0,0);
-}
-function goHome(){ location.hash=""; page.style.display="none"; home.style.display="block"; }
-document.getElementById("goHome").onclick=goHome;
-document.getElementById("q").addEventListener("input",function(){ var t=document.getElementById("q").value.trim().toLowerCase(); renderCats(t); if(openDomain) fillRail(openDomain); });
-window.addEventListener("hashchange",function(){ var h=location.hash.replace(/^#/,""); if(h.indexOf("file/")===0) openCase(decodeURIComponent(h.slice(5))); else goHome(); });
-renderCats("");
-if(location.hash.indexOf("file/")>=0) openCase(decodeURIComponent(location.hash.replace(/^#?file\//,"")));
-</script>
+<script src="app.js"></script>
 </body>
 </html>
