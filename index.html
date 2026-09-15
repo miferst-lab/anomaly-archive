@@ -25,17 +25,14 @@
   aside { border-right:1px solid var(--line); padding:18px 16px 40px; background:#080c12; }
   aside h2 { font-size:10px; letter-spacing:.2em; color:var(--amber-dim); margin:16px 0 8px; }
   .search { width:100%; background:#0d141d; border:1px solid var(--line); color:var(--text); padding:10px 12px; font-size:13px; outline:none; }
-  .search:focus { border-color:var(--cyan); }
   .navbtn { display:block; width:100%; text-align:left; background:transparent; border:0; color:var(--text); padding:8px 8px; cursor:pointer; font-size:13px; border-left:2px solid transparent; }
   .navbtn:hover, .navbtn.active { background:#121b26; border-left-color:var(--cyan); color:var(--cyan); }
   .count { color:var(--muted); font-size:11px; float:right; }
   main { padding:22px 26px 80px; }
-  .intro { max-width:920px; margin-bottom:22px; }
   .intro h2 { font-size:22px; letter-spacing:.08em; color:var(--amber); font-weight:500; margin-bottom:8px; }
-  .intro p { color:var(--muted); line-height:1.65; font-size:14px; }
+  .intro p { color:var(--muted); line-height:1.65; font-size:14px; margin-bottom:18px; }
   .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:14px; }
-  .card { background:var(--panel); border:1px solid var(--line); padding:14px 14px 12px; cursor:pointer; min-height:168px; display:flex; flex-direction:column; gap:8px; }
-  .card:hover { border-color:var(--amber-dim); }
+  .card { background:var(--panel); border:1px solid var(--line); padding:14px; cursor:pointer; min-height:168px; display:flex; flex-direction:column; gap:8px; }
   .card .yr { font-family:ui-monospace,Menlo,monospace; font-size:11px; color:var(--cyan); }
   .card h3 { font-size:16px; font-weight:560; }
   .card .loc { font-size:12px; color:var(--muted); }
@@ -50,7 +47,6 @@
   .dossier p { line-height:1.7; color:#c9d5e0; margin:10px 0; font-size:14.5px; }
   .dossier h3 { margin:18px 0 8px; font-size:12px; letter-spacing:.16em; color:var(--cyan); text-transform:uppercase; }
   .dossier a { color:var(--green); }
-  .sources li { margin:6px 0; font-size:13.5px; line-height:1.5; }
   .related button { background:#121a24; border:1px solid var(--line); color:var(--text); padding:6px 10px; margin:4px 4px 0 0; cursor:pointer; }
   footer { border-top:1px solid var(--line); padding:16px 28px; font-size:12px; color:var(--muted); }
   .note { font-size:12px; color:var(--amber-dim); margin-top:10px; }
@@ -74,9 +70,8 @@
     <input class="search" id="q" placeholder="Search designation, place, year…" />
     <h2>Domains</h2>
     <div id="domains"></div>
-    <h2>Protocols</h2>
     <button class="navbtn" data-filter="all">All files</button>
-    <p class="note">This is a seed catalog of landmark files, not a claim that every report is true. Each dossier lists sources.</p>
+    <p class="note">If the file count is under 80, reload once — case packs load from a CDN.</p>
   </aside>
   <main>
     <div class="intro">
@@ -88,11 +83,11 @@
 </div>
 <footer>Seed archive · English primary · X-Files / Matrix / LCARS.</footer>
 <div class="overlay" id="overlay"><article class="dossier" id="dossier"></article></div>
-<script src="https://cdn.jsdelivr.net/gh/miferst-lab/anomaly-archive@main/data-0.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/miferst-lab/anomaly-archive@main/data-1.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/miferst-lab/anomaly-archive@main/data-2.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/miferst-lab/anomaly-archive@main/data-3.js"></script>
-<script src="https://raw.githubusercontent.com/miferst-lab/anomaly-archive/main/data-4.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/miferst-lab/anomaly-archive@caa22c3bdab54e0050948ed7aa9e9e77ed96c0f0/data-0.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/miferst-lab/anomaly-archive@2f7962b2364d2cdc7bd89739d75ba52cc5a50584/data-1.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/miferst-lab/anomaly-archive@d43b3a4d5ba797d56c0db57663dedc919c851c0e/data-2.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/miferst-lab/anomaly-archive@400ec2b14529c9f9969f926edc164c067a2d9cf7/data-3.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/miferst-lab/anomaly-archive@388a39ca342ee21e64b7c31039b81693dfe19418/data-4.js"></script>
 <script>
 const CASES = window.CASES || [];
 const DOMAINS = [["all","All files"],["uap","UAP / aerial"],["uso","USO / transmedium"],["encounters","Close encounters"],["crash-retrieval","Crash & retrieval"],["nuclear","Nuclear & strategic"],["cover-up","Programs & cover narratives"],["cryptid","Cryptids"],["high-strangeness","High strangeness"],["haunt","Hauntings"],["disappearance","Disappearances"],["fortean","Fortean & sky/space"],["artifact","Anomalous artifacts"],["historical-sky","Pre-modern skies"],["religious-anomaly","Religious anomalies"]];
@@ -116,7 +111,7 @@ DOMAINS.forEach(([id,label]) => {
 });
 function matches(c, term){
   if(!term) return true;
-  return (c.title+" "+c.loc+" "+c.year+" "+c.summary+" "+c.tags.join(" ")).toLowerCase().includes(term);
+  return (c.title+" "+c.loc+" "+c.year+" "+c.summary+" "+(c.tags||[]).join(" ")).toLowerCase().includes(term);
 }
 function render(){
   const term = q.value.trim().toLowerCase();
@@ -124,7 +119,7 @@ function render(){
   clean.filter(c => (filter==="all"||c.domain===filter) && matches(c,term)).forEach(c => {
     const el = document.createElement("article");
     el.className = "card";
-    el.innerHTML = `<div class="yr">${c.year} · ${c.domain}</div><h3>${c.title}</h3><div class="loc">${c.loc}</div><div class="sum">${c.summary}</div><div class="tags">${c.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>`;
+    el.innerHTML = `<div class="yr">${c.year} · ${c.domain}</div><h3>${c.title}</h3><div class="loc">${c.loc}</div><div class="sum">${c.summary}</div><div class="tags">${(c.tags||[]).map(t=>`<span class="tag">${t}</span>`).join("")}</div>`;
     el.onclick = () => openCase(c.id);
     grid.appendChild(el);
   });
@@ -133,7 +128,7 @@ function openCase(id){
   const c = clean.find(x => x.id===id);
   if(!c) return;
   const rel = (c.related||[]).map(rid => clean.find(x=>x.id===rid)).filter(Boolean);
-  dossier.innerHTML = `<button class="close" id="x">CLOSE</button><div class="yr">${c.year} · FILE ${c.id}</div><h2>${c.title}</h2><div class="loc">${c.loc}</div><p>${c.text}</p><h3>Sources</h3><ul class="sources">${(c.sources||[]).map(s=>`<li><a href="${s.u}" target="_blank" rel="noopener">${s.n}</a></li>`).join("")}</ul>${rel.length?`<h3>Related files</h3><div class="related">${rel.map(r=>`<button data-go="${r.id}">${r.title}</button>`).join("")}</div>`:""}`;
+  dossier.innerHTML = `<button class="close" id="x">CLOSE</button><div class="yr">${c.year} · FILE ${c.id}</div><h2>${c.title}</h2><div class="loc">${c.loc}</div><p>${c.text||c.summary}</p><h3>Sources</h3><ul class="sources">${(c.sources||[]).map(s=>`<li><a href="${s.u}" target="_blank" rel="noopener">${s.n}</a></li>`).join("")}</ul>${rel.length?`<h3>Related files</h3><div class="related">${rel.map(r=>`<button data-go="${r.id}">${r.title}</button>`).join("")}</div>`:""}`;
   overlay.classList.add("open");
   dossier.querySelector("#x").onclick = () => overlay.classList.remove("open");
   dossier.querySelectorAll("[data-go]").forEach(b => b.onclick = () => openCase(b.dataset.go));
