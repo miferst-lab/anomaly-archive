@@ -57,16 +57,21 @@ h2.sec{font-size:11px;letter-spacing:.2em;color:var(--amber-dim);margin:8px 0 12
 .comment .who{color:var(--amber);font-size:12px}
 .note{font-size:12px;color:var(--amber-dim);margin-top:8px}
 footer{border-top:1px solid var(--line);padding:14px 22px;font-size:12px;color:var(--muted)}
-#nx-map,#nx-time{background:#070b10;border:1px solid var(--line);margin:8px 0}
+#nx-map,#nx-time{background:#070b10;border:1px solid var(--line);margin:8px 0;display:block}
 .nx-dot{cursor:pointer}
 .nx-legend{font-size:11px;color:var(--muted);margin:8px 0 12px}
 .nx-legend span{display:inline-block;width:10px;height:10px;margin:0 6px 0 12px;vertical-align:middle}
 .nx-legend .c1{background:#6ee7e0}
 .nx-legend .c2{background:#e8b86d}
-.nx-legend .c3{background:#3d4a58}
+.nx-legend .c3{background:#8aa0b5}
 .nx-cap{font-size:11px;color:var(--muted);margin-bottom:10px}
 .nx-info{border:1px solid var(--line);padding:12px;background:#0a1119;font-size:14px;line-height:1.5}
 .nx-open{margin-left:8px;background:#15202c;border:1px solid var(--cyan);color:var(--cyan);padding:4px 8px;cursor:pointer}
+.nx-tools{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.nx-tools button{background:#121a24;border:1px solid var(--line);color:var(--text);padding:6px 8px;cursor:pointer;font-size:11px}
+.nx-tools button:hover{border-color:var(--cyan);color:var(--cyan)}
+.nx-sliders{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0 12px;font-size:12px;color:var(--muted)}
+.nx-sliders input{width:100%;accent-color:#e8b86d}
 </style>
 </head>
 <body>
@@ -105,6 +110,6 @@ footer{border-top:1px solid var(--line);padding:14px 22px;font-size:12px;color:v
 <script src="data-6.js"></script>
 <script src="geo.js"></script>
 <script src="app.js?v=4"></script>
-<script src="nexus.js?v=1"></script>
+<script src="nexus.js?v=2"></script>
 </body>
 </html>
