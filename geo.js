@@ -117,5 +117,8 @@ window.GEO = {
 "rainbow-serpent":[-19.0,134.0,-1000],
 "lascaux":[45.05,1.17,-15000],
 "chauvet":[44.39,4.42,-32000],
-"sulawesi-pigs":[-5.0,119.6,-43000]
+"sulawesi-pigs":[-5.0,119.6,-43000],
+"emilcin-1978":[51.15,22.04,1978],
+"gdansk-bay-uso":[54.45,18.85,1980],
+"baltic-anomaly":[60.4,18.2,2011]
 };
