@@ -1,8 +1,9 @@
 # THE ARCHIVE
 
-Seed catalog of UAP, USO, inner-earth, cryptid and unexplained files.
+Classified dossier catalog (X-Files + Matrix). No Star Trek / LCARS chrome.
 
-Public site (GitHub Pages):
+Live:
 https://miferst-lab.github.io/anomaly-archive/
 
-Source: `index.html` plus `data-0.js` … `data-6.js`.
+Repo:
+https://github.com/miferst-lab/anomaly-archive
