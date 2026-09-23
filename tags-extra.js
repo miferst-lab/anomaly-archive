@@ -4,7 +4,8 @@
     [/ussr|soviet|voronezh|petrozavodsk|dalnegorsk/i, ["ussr", "russia"]],
     [/russian empire|siberia|urals|dyatlov|tunguska|karelia|primorsky/i, ["russia"]],
     [/united kingdom|england|wales|scotland|suffolk|essex|cornwall/i, ["uk"]],
-    [/united states|usa|new mexico|nevada|arizona|california|washington|montana|texas/i, ["usa"]]
+    [/united states|usa|new mexico|nevada|arizona|california|washington|montana|texas/i, ["usa"]],
+    [/italy|italian|florence|tuscany|genoa|pescara|ascoli|adriatic|varese|turin|gorgona|zanfretta|w56|amicizia/i, ["italy"]]
   ];
   (window.CASES || []).forEach(function (c) {
     if (!c) return;
