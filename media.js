@@ -1,0 +1,37 @@
+window.MEDIA_TYPES = {
+  official: "OFFICIAL STILL",
+  site: "SITE — not the object",
+  claimed: "CLAIMED PHOTO — status unresolved or disputed",
+  period: "PERIOD ILLUSTRATION — not a photograph of the event",
+  poster: "POSTER — category plate, not evidence",
+  generated: "GENERATED — not a record"
+};
+window.MEDIA = {
+  "emilcin-1978": { type: "site", file: "Emilcin-pomnik.jpg", cap: "Nautilus cube in the village, 2005 monument — not a craft." },
+  "nazca-lines": { type: "site", file: "Nazca Lines Hummingbird.jpg", cap: "Hummingbird geoglyph from the air." },
+  "tassili-rockart": { type: "site", file: "Tassili n'Ajjer Landscape.jpg", cap: "Tassili landscape; rock art is on site panels." },
+  "roswell-1947": { type: "claimed", file: "Marcel-roswell-debris 0.jpg", cap: "Jesse Marcel with Fort Worth debris, 1947. Weather-balloon reading is the official line." },
+  "derinkuyu": { type: "site", file: "Derinkuyu Underground City.jpg", cap: "Underground city, Cappadocia." },
+  "voynich": { type: "official", file: "Voynich Manuscript (129).jpg", cap: "Beinecke folio." },
+  "tunguska": { type: "site", file: "Tunguska event fallen trees.jpg", cap: "Fallen trees at the 1908 site." },
+  "nessie": { type: "site", file: "Urquhart Castle and Loch Ness.jpg", cap: "Loch Ness and Urquhart Castle — not a creature still." },
+  "fatima-1917": { type: "site", file: "Sanctuary of Fatima.jpg", cap: "Sanctuary grounds." },
+  "antikythera": { type: "official", file: "NAMA Machine d'Anticythere 1.jpg", cap: "Mechanism fragments, National Archaeological Museum." },
+  "lemuria-shasta": { type: "site", file: "Mount Shasta.jpg", cap: "Mount Shasta." },
+  "wylatowo-circles": { type: "site", file: "Wheat field.jpg", cap: "Grain field stand-in; individual pictograms are separately copyrighted." },
+  "gdynia-1959": { type: "site", file: "Gdynia harbour.jpg", cap: "Harbour context, not a 1959 object frame." },
+  "gdansk-bay-uso": { type: "site", file: "Gdańsk Bay.jpg", cap: "Gulf of Gdansk water, not a recovery still." },
+  "baltic-anomaly": { type: "claimed", file: "Baltic Sea map.jpg", cap: "Basin map stand-in. Ocean X sonar stills stay with the team." },
+  "florence-1954": { type: "site", file: "Stadio Artemio Franchi.jpg", cap: "Stadium that stopped play; no surviving official object still." },
+  "w56-amicizia": { type: "period", file: "Rocca Pia Ascoli Piceno.jpg", cap: "Rocca Pia, first-meeting site in the story. Claimed interior photos are disputed." },
+  "zanfretta-1978": { type: "site", file: "Liguria hills.jpg", cap: "Liguria hinterland type-site, not an entity portrait." },
+  "cennina-1954": { type: "site", file: "Tuscany countryside.jpg", cap: "Val d'Ambra country, not Rosa Lotti's object." },
+  "lascaux": { type: "official", file: "Lascaux painting.jpg", cap: "Cave art as documented; replica circuit." },
+  "chauvet": { type: "site", file: "Pont d'Arc.jpg", cap: "Ardèche approach; cave interior is restricted." },
+  "wandjina": { type: "poster", file: "Kimberley Australia.jpg", cap: "Country only. Wandjina figures are not reproduced here." },
+  "nimitz-2004": { type: "official", file: "USS Nimitz (CVN-68).jpg", cap: "Carrier context. Tic Tac clips are DoD releases, not hosted here." },
+  "gimbal-2015": { type: "official", file: "US Navy aircraft.jpg", cap: "Navy context. FLIR clips stay on official channels." },
+  "area-51": { type: "site", file: "Groom Lake.jpg", cap: "Public-distance view of the basin / highway country." },
+  "nautilus-archive": { type: "site", file: "Palace of Culture and Science Warsaw.jpg", cap: "PKiN, former UFO-Video rooms." },
+  "cun-archive": { type: "period", file: "Rome skyline.jpg", cap: "Italian club geography, not a craft." }
+};
