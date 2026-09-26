@@ -17,5 +17,11 @@ Object.assign(window.GEO || (window.GEO = {}), {
 "adriatic-1978":[42.5,15.5,1978],
 "torino-caselle-1973":[45.20,7.65,1973],
 "abbiate-guazzone-1950":[45.78,8.86,1950],
-"cun-archive":[41.89,12.49,1967]
+"cun-archive":[41.89,12.49,1967],
+"jane-2011":[34.05,-118.25,2011],
+"wanderka-1955":[48.06,16.70,1955],
+"watch-guard-1982":[38.6,-80.5,1982],
+"brazil-blood":[-14.2,-51.9,2018],
+"kitzingen-2002":[49.74,10.16,2002],
+"atacama-ata":[-20.91,-69.85,2003]
 });
