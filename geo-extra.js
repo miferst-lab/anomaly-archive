@@ -23,5 +23,7 @@ Object.assign(window.GEO || (window.GEO = {}), {
 "watch-guard-1982":[38.6,-80.5,1982],
 "brazil-blood":[-14.2,-51.9,2018],
 "kitzingen-2002":[49.74,10.16,2002],
-"atacama-ata":[-20.91,-69.85,2003]
+"atacama-ata":[-20.91,-69.85,2003],
+"hawara-dippy":[29.274,30.898,-440],
+"giza-sar-biondi":[29.976,31.131,2025]
 });
