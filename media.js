@@ -111,5 +111,7 @@ window.MEDIA = {
 "grusch-2023":{type:"official",file:"United States Capitol.jpg",cap:"Hearing house."},
 "jfk":{type:"official",file:"John F. Kennedy Official Portrait.jpg",cap:"Official portrait. File is the paper trail, not a new still."},
 "mkultra":{type:"official",file:"CIA headquarters.jpg",cap:"Langley campus."},
-"nuremberg-1561":{type:"period",file:"Celestial phenomenon over Nuremberg 1561.jpg",cap:"1561 broadsheet."}
+"nuremberg-1561":{type:"period",file:"Celestial phenomenon over Nuremberg 1561.jpg",cap:"1561 broadsheet."},
+"qaruh-pr135":{type:"site",file:"Persian Gulf satellite.jpg",cap:"Gulf waters stand-in. Not a still from PR135."},
+"sefaa-sep2026":{type:"site",file:"Santiago Chile Andes.jpg",cap:"Santiago basin and Andes foothills. Site stand-in; not a still from any reported object."}
 };
