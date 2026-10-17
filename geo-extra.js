@@ -26,5 +26,6 @@ Object.assign(window.GEO || (window.GEO = {}), {
 "atacama-ata":[-20.91,-69.85,2003],
 "hawara-dippy":[29.274,30.898,-440],
 "giza-sar-biondi":[29.976,31.131,2025],
-"qaruh-pr135":[28.82,48.78,2025]
+"qaruh-pr135":[28.82,48.78,2025],
+"sefaa-sep2026":[-33.45,-70.67,2026]
 });
