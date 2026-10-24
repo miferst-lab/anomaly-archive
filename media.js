@@ -113,5 +113,6 @@ window.MEDIA = {
 "mkultra":{type:"official",file:"CIA headquarters.jpg",cap:"Langley campus."},
 "nuremberg-1561":{type:"period",file:"Celestial phenomenon over Nuremberg 1561.jpg",cap:"1561 broadsheet."},
 "qaruh-pr135":{type:"site",file:"Persian Gulf satellite.jpg",cap:"Gulf waters stand-in. Not a still from PR135."},
-"sefaa-sep2026":{type:"site",file:"Santiago Chile Andes.jpg",cap:"Santiago basin and Andes foothills. Site stand-in; not a still from any reported object."}
+"sefaa-sep2026":{type:"site",file:"Santiago Chile Andes.jpg",cap:"Santiago basin and Andes foothills. Site stand-in; not a still from any reported object."},
+"pursue-r07-triangle-2026":{type:"site",file:"Western US desert mountains.jpg",cap:"Western U.S. ridgeline and canyon country. Site stand-in only; no imagery of the reported object was released with the memorandum."}
 };
