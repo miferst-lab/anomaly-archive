@@ -28,5 +28,7 @@ Object.assign(window.GEO || (window.GEO = {}), {
 "giza-sar-biondi":[29.976,31.131,2025],
 "qaruh-pr135":[28.82,48.78,2025],
 "sefaa-sep2026":[-33.45,-70.67,2026],
-"pursue-r07-triangle-2026":[40.0,-113.0,2026]
+"pursue-r07-triangle-2026":[40.0,-113.0,2026],
+"san-diego-airport-2026":[32.73,-117.19,2026],
+"ba-heathrow-airprox-2026":[51.24,-0.57,2026]
 });
