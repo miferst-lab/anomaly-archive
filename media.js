@@ -114,5 +114,7 @@ window.MEDIA = {
 "nuremberg-1561":{type:"period",file:"Celestial phenomenon over Nuremberg 1561.jpg",cap:"1561 broadsheet."},
 "qaruh-pr135":{type:"site",file:"Persian Gulf satellite.jpg",cap:"Gulf waters stand-in. Not a still from PR135."},
 "sefaa-sep2026":{type:"site",file:"Santiago Chile Andes.jpg",cap:"Santiago basin and Andes foothills. Site stand-in; not a still from any reported object."},
-"pursue-r07-triangle-2026":{type:"site",file:"Western US desert mountains.jpg",cap:"Western U.S. ridgeline and canyon country. Site stand-in only; no imagery of the reported object was released with the memorandum."}
+"pursue-r07-triangle-2026":{type:"site",file:"Western US desert mountains.jpg",cap:"Western U.S. ridgeline and canyon country. Site stand-in only; no imagery of the reported object was released with the memorandum."},
+"san-diego-airport-2026":{type:"site",file:"San Diego International Airport.jpg",cap:"San Diego International Airport and coastal skyline. Site stand-in only; no imagery of the reported silver object was released with the FAA records."},
+"ba-heathrow-airprox-2026":{type:"site",file:"British Airways Boeing 777.jpg",cap:"British Airways Boeing 777 type aircraft. Site/context stand-in; no imagery of the reported silver object exists."}
 };
