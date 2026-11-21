@@ -30,5 +30,6 @@ Object.assign(window.GEO || (window.GEO = {}), {
 "sefaa-sep2026":[-33.45,-70.67,2026],
 "pursue-r07-triangle-2026":[40.0,-113.0,2026],
 "san-diego-airport-2026":[32.73,-117.19,2026],
-"ba-heathrow-airprox-2026":[51.24,-0.57,2026]
+"ba-heathrow-airprox-2026":[51.24,-0.57,2026],
+"pursue-r08-radar-2023":[40.0,-113.0,2023]
 });
