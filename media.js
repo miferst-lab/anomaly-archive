@@ -117,5 +117,6 @@ window.MEDIA = {
 "pursue-r07-triangle-2026":{type:"site",file:"Western US desert mountains.jpg",cap:"Western U.S. ridgeline and canyon country. Site stand-in only; no imagery of the reported object was released with the memorandum."},
 "san-diego-airport-2026":{type:"site",file:"San Diego International Airport.jpg",cap:"San Diego International Airport and coastal skyline. Site stand-in only; no imagery of the reported silver object was released with the FAA records."},
 "ba-heathrow-airprox-2026":{type:"site",file:"British Airways Boeing 777.jpg",cap:"British Airways Boeing 777 type aircraft. Site/context stand-in; no imagery of the reported silver object exists."},
-"pursue-r08-radar-2023":{type:"official",cap:"AARO/PURSUE briefing slide (DOW-UAP-D165) summarizing the unresolved radar detections. Official document; no imagery of an object or continuous track was released."}
+"pursue-r08-radar-2023":{type:"official",cap:"AARO/PURSUE briefing slide (DOW-UAP-D165) summarizing the unresolved radar detections. Official document; no imagery of an object or continuous track was released."},
+"genkai-2025":{type:"site",cap:"Aerial view of Genkai Nuclear Power Station. Site stand-in; no imagery of the 26 July 2025 lights was released."}
 };
